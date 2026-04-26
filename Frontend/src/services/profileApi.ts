@@ -137,7 +137,7 @@ const profile: ProfileResponse = {
       ],
     },
     {
-      company: '浙江慧达工程软装技术有限公司',
+      company: '浙江慧远工程数据技术有限公司',
       role: 'C# 桌面应用开发',
       period: '2023-06 - 2026-02',
       location: '浙江杭州',
