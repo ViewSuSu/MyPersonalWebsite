@@ -1,0 +1,28 @@
+# Logs
+*.log
+logs/
+
+# Dependencies
+node_modules/
+Frontend/node_modules/
+
+# Build output
+dist/
+Frontend/dist/
+dist-ssr/
+
+# Local/editor files
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.local
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Local verification screenshots
+Frontend/test-shots/
+Frontend/.codex-screenshots/
