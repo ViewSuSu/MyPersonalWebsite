@@ -659,6 +659,37 @@ h1 {
   background: var(--ink);
 }
 
+.project-preview.is-placeholder {
+  display: grid;
+  align-content: end;
+  gap: 8px;
+  padding: 18px;
+  background:
+    linear-gradient(135deg, rgba(5, 122, 115, 0.12), rgba(255, 255, 250, 0.72)),
+    linear-gradient(90deg, rgba(11, 18, 16, 0.055) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(11, 18, 16, 0.045) 1px, transparent 1px),
+    rgba(247, 251, 246, 0.86);
+  background-size: auto, 24px 24px, 24px 24px, auto;
+}
+
+.project-preview figcaption {
+  display: grid;
+  gap: 6px;
+}
+
+.project-preview figcaption span {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 950;
+}
+
+.project-preview figcaption strong {
+  color: rgba(11, 18, 16, 0.76);
+  font-size: 18px;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+}
+
 .project-preview img {
   width: 100%;
   height: 100%;

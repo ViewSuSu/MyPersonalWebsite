@@ -253,8 +253,12 @@ onMounted(async () => {
 
         <div class="project-grid">
           <article v-for="project in supportingProjects" :key="project.name" class="project-card">
-            <figure v-if="getPrimaryPreview(project)" class="project-preview">
-              <img :src="getPrimaryPreview(project)!" :alt="`${project.title} 截图`" />
+            <figure class="project-preview" :class="{ 'is-placeholder': !getPrimaryPreview(project) }">
+              <img v-if="getPrimaryPreview(project)" :src="getPrimaryPreview(project)!" :alt="`${project.title} 截图`" />
+              <figcaption v-else>
+                <span>{{ project.category }}</span>
+                <strong>{{ project.name }}</strong>
+              </figcaption>
             </figure>
             <div class="project-card-copy">
               <span>{{ project.category }}</span>
