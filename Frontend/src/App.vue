@@ -145,6 +145,16 @@ onMounted(async () => {
             <span>BIM/CAD</span>
             <span>AI Tooling</span>
           </div>
+          <div class="contact-line" aria-label="联系方式">
+            <a :href="`mailto:${profile.contact.email}`">
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path
+                  d="M1.75 3A1.75 1.75 0 0 0 0 4.75v6.5C0 12.216.784 13 1.75 13h12.5A1.75 1.75 0 0 0 16 11.25v-6.5A1.75 1.75 0 0 0 14.25 3H1.75Zm-.25 2.188v6.062c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.188l-5.54 3.32a1.75 1.75 0 0 1-1.92 0L1.5 5.188Zm.874-.688 5.438 3.258a.25.25 0 0 0 .376 0L13.626 4.5H2.374Z"
+                />
+              </svg>
+              {{ profile.contact.email }}
+            </a>
+          </div>
           <div class="social-dock" aria-label="平台入口">
             <component
               :is="social.url ? 'a' : 'span'"
@@ -296,7 +306,6 @@ onMounted(async () => {
 
       <footer class="site-footer">
         <strong>{{ profile.brandName }}</strong>
-        <span>{{ profile.contact.email }}</span>
       </footer>
     </template>
   </main>
