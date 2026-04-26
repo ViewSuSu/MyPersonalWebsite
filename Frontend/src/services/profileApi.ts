@@ -21,7 +21,7 @@ const profile: ProfileResponse = {
     { platform: '知乎', handle: '小窗同学', url: null },
   ],
   summary:
-    '我把复杂的桌面应用开发流程拆开、重组，再做成清晰、稳定、可维护的工具窗口。小窗同学这个名字，代表我对 C# 桌面端、BIM/CAD 自动化和 AI 工具链的长期表达。',
+    '我把复杂的桌面应用开发流程拆开、重组，再做成清晰、稳定、可维护的工具窗口。小窗同学这个名字，代表我对 C# 桌面端、WPF、AI 工具链和 BIM/CAD 自动化的长期表达。',
   metrics: [
     { label: '3.5年', value: '工作经验', caption: '桌面应用开发、WPF、Revit、CAD' },
     { label: '5', value: '精选开源项目', caption: '从控件库到 BIM 自动化' },
