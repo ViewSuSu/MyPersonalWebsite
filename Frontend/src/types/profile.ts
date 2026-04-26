@@ -13,7 +13,6 @@ export interface ProfileResponse {
   openSourceProjects: Project[]
   skills: SkillGroup[]
   experiences: ExperienceItem[]
-  education: EducationItem[]
   gitHubProfile: GitHubProfile
 }
 
@@ -72,13 +71,6 @@ export interface ExperienceItem {
   period: string
   location: string
   highlights: string[]
-}
-
-export interface EducationItem {
-  school: string
-  degree: string
-  start: string
-  end: string
 }
 
 export interface GitHubProfile {

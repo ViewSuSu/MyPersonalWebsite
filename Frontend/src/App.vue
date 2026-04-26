@@ -291,15 +291,6 @@ onMounted(async () => {
               </ul>
             </div>
           </article>
-
-          <article v-for="edu in profile.education" :key="`${edu.school}-${edu.start}`">
-            <span>{{ edu.start }} - {{ edu.end }}</span>
-            <div>
-              <h3>{{ edu.school }}</h3>
-              <strong>{{ edu.degree }}</strong>
-              <p>教育背景</p>
-            </div>
-          </article>
         </div>
       </section>
 

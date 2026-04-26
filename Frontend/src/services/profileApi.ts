@@ -148,7 +148,6 @@ const profile: ProfileResponse = {
       ],
     },
   ],
-  education: [{ school: '南华大学', degree: '建筑学 本科', start: '2018-09', end: '2023-06' }],
   gitHubProfile: {
     achievements: [
       {
