@@ -59,8 +59,8 @@ const totalForks = computed(() =>
 const heroMetrics = computed(() => [
   { value: '3.5年', label: '工作经验', detail: '桌面应用开发 / WPF / Revit / CAD' },
   { value: `${profile.value?.openSourceProjects.length ?? 0}`, label: '开源作品', detail: '组件、插件、可视化工具' },
-  { value: `${totalStars.value}`, label: 'Stars', detail: 'GitHub repository stars' },
-  { value: `${totalForks.value}`, label: 'Forks', detail: 'GitHub repository forks' },
+  { value: `${totalStars.value}`, label: '星标', detail: 'GitHub 仓库获得的星标' },
+  { value: `${totalForks.value}`, label: '分支', detail: 'GitHub 仓库被分支引用的次数' },
 ])
 
 const aboutItems = computed(() =>
@@ -170,7 +170,7 @@ onMounted(async () => {
             <p>{{ metric.detail }}</p>
           </article>
           <article v-if="profile.gitHubProfile.achievements.length" class="achievement-metric">
-            <span>GitHub Achievement</span>
+            <span>GitHub 成就</span>
             <div class="achievement-inline">
               <a
                 v-for="achievement in profile.gitHubProfile.achievements"
@@ -219,8 +219,22 @@ onMounted(async () => {
             <p>{{ featuredProject.description }}</p>
             <div class="featured-footer">
               <div class="project-meta">
-                <span>Stars {{ formatGitHubCount(featuredProject.stars) }}</span>
-                <span>Forks {{ formatGitHubCount(featuredProject.forks) }}</span>
+                <span class="github-count" :aria-label="`星标 ${formatGitHubCount(featuredProject.stars)}`">
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <path
+                      d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.193a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.981a.75.75 0 0 1-1.088-.79l.72-4.194-3.047-2.97a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
+                    />
+                  </svg>
+                  {{ formatGitHubCount(featuredProject.stars) }}
+                </span>
+                <span class="github-count" :aria-label="`分支 ${formatGitHubCount(featuredProject.forks)}`">
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <path
+                      d="M5 3.25a2 2 0 1 0-2.75 1.854v5.792a2 2 0 1 0 1.5 0V5.104A2 2 0 0 0 5 3.25ZM3 2.75a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1Zm0 9.5a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1Zm10-7a2 2 0 1 0-2.75-1.854v.854A2.75 2.75 0 0 1 7.5 7H5.75a.75.75 0 0 0 0 1.5H7.5a4.25 4.25 0 0 0 4.25-4.25v-.854A2 2 0 0 0 13 5.25Zm0-2.5a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1Z"
+                    />
+                  </svg>
+                  {{ formatGitHubCount(featuredProject.forks) }}
+                </span>
               </div>
               <a class="project-link" :href="featuredProject.url" target="_blank" rel="noreferrer">仓库</a>
             </div>
@@ -237,8 +251,22 @@ onMounted(async () => {
               <h3>{{ project.name }}</h3>
               <p>{{ project.description }}</p>
               <div class="project-card-footer">
-                <em>Stars {{ formatGitHubCount(project.stars) }}</em>
-                <em>Forks {{ formatGitHubCount(project.forks) }}</em>
+                <em class="github-count" :aria-label="`星标 ${formatGitHubCount(project.stars)}`">
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <path
+                      d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.193a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.981a.75.75 0 0 1-1.088-.79l.72-4.194-3.047-2.97a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
+                    />
+                  </svg>
+                  {{ formatGitHubCount(project.stars) }}
+                </em>
+                <em class="github-count" :aria-label="`分支 ${formatGitHubCount(project.forks)}`">
+                  <svg viewBox="0 0 16 16" aria-hidden="true">
+                    <path
+                      d="M5 3.25a2 2 0 1 0-2.75 1.854v5.792a2 2 0 1 0 1.5 0V5.104A2 2 0 0 0 5 3.25ZM3 2.75a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1Zm0 9.5a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1Zm10-7a2 2 0 1 0-2.75-1.854v.854A2.75 2.75 0 0 1 7.5 7H5.75a.75.75 0 0 0 0 1.5H7.5a4.25 4.25 0 0 0 4.25-4.25v-.854A2 2 0 0 0 13 5.25Zm0-2.5a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1Z"
+                    />
+                  </svg>
+                  {{ formatGitHubCount(project.forks) }}
+                </em>
                 <a :href="project.url" target="_blank" rel="noreferrer">仓库</a>
               </div>
             </div>

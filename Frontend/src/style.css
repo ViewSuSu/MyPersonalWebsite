@@ -306,6 +306,17 @@ h1 {
   font-weight: 850;
 }
 
+.github-count {
+  gap: 6px;
+}
+
+.github-count svg {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+
 .social-dock {
   display: flex;
   align-items: center;
