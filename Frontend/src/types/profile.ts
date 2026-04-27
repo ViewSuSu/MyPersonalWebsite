@@ -9,7 +9,6 @@ export interface ProfileResponse {
   summary: string
   metrics: Metric[]
   focusAreas: FocusArea[]
-  principles: Principle[]
   openSourceProjects: Project[]
   skills: SkillGroup[]
   experiences: ExperienceItem[]
@@ -18,6 +17,8 @@ export interface ProfileResponse {
 
 export interface ContactInfo {
   phone: string
+  qq: string
+  wechat: string
   email: string
   gitHub: string
   bilibili: string
@@ -38,13 +39,10 @@ export interface Metric {
 
 export interface FocusArea {
   title: string
+  stack: string
   description: string
+  points: string[]
   keywords: string[]
-}
-
-export interface Principle {
-  title: string
-  description: string
 }
 
 export interface Project {

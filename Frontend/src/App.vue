@@ -56,19 +56,20 @@ const totalForks = computed(() =>
   profile.value?.openSourceProjects.reduce((total, project) => total + (project.forks ?? 0), 0) ?? 0,
 )
 
-const heroMetrics = computed(() => [
-  { value: '3.5年', label: '工作经验', detail: '桌面应用开发 / WPF / Revit / CAD' },
-  { value: `${profile.value?.openSourceProjects.length ?? 0}`, label: '开源作品', detail: '组件、插件、可视化工具' },
-  { value: `${totalStars.value}`, label: '星标', detail: 'GitHub 仓库获得的星标' },
-  { value: `${totalForks.value}`, label: '分支', detail: 'GitHub 仓库被分支引用的次数' },
-])
+const contactLinks = computed(() => {
+  if (!profile.value) {
+    return []
+  }
 
-const aboutItems = computed(() =>
-  profile.value?.focusAreas.map((area, index) => ({
-    ...area,
-    principle: profile.value?.principles[index] ?? null,
-  })) ?? [],
-)
+  return [
+    { label: '邮箱', value: profile.value.contact.email, icon: 'mail', href: `mailto:${profile.value.contact.email}` },
+    { label: 'QQ', value: profile.value.contact.qq, iconUrl: assetUrl('brand-icons/qq.svg') },
+    { label: '微信', value: profile.value.contact.wechat, iconUrl: assetUrl('brand-icons/wechat.svg') },
+    { label: '电话', value: profile.value.contact.phone, iconUrl: assetUrl('brand-icons/phone.svg'), href: `tel:${profile.value.contact.phone}` },
+  ]
+})
+
+const aboutItems = computed(() => profile.value?.focusAreas ?? [])
 
 function getRepoPreviews(project: Project) {
   return repoPreviews[project.name] ?? []
@@ -145,15 +146,25 @@ onMounted(async () => {
             <span>BIM/CAD</span>
             <span>AI Tooling</span>
           </div>
-          <div class="contact-line" aria-label="联系方式">
-            <a :href="`mailto:${profile.contact.email}`">
-              <svg viewBox="0 0 16 16" aria-hidden="true">
+          <div class="contact-grid" aria-label="联系方式">
+            <component
+              :is="item.href ? 'a' : 'span'"
+              v-for="item in contactLinks"
+              :key="item.label"
+              class="contact-chip"
+              :href="item.href || undefined"
+            >
+              <svg v-if="item.icon === 'mail'" viewBox="0 0 16 16" aria-hidden="true">
                 <path
                   d="M1.75 3A1.75 1.75 0 0 0 0 4.75v6.5C0 12.216.784 13 1.75 13h12.5A1.75 1.75 0 0 0 16 11.25v-6.5A1.75 1.75 0 0 0 14.25 3H1.75Zm-.25 2.188v6.062c0 .138.112.25.25.25h12.5a.25.25 0 0 0 .25-.25V5.188l-5.54 3.32a1.75 1.75 0 0 1-1.92 0L1.5 5.188Zm.874-.688 5.438 3.258a.25.25 0 0 0 .376 0L13.626 4.5H2.374Z"
                 />
               </svg>
-              {{ profile.contact.email }}
-            </a>
+              <img v-else :src="item.iconUrl" :alt="item.label" />
+              <span>
+                <small>{{ item.label }}</small>
+                {{ item.value }}
+              </span>
+            </component>
           </div>
           <div class="social-dock" aria-label="平台入口">
             <component
@@ -173,27 +184,35 @@ onMounted(async () => {
           </div>
         </aside>
 
-        <section class="metric-board" aria-label="个人数据">
-          <article v-for="metric in heroMetrics" :key="metric.label">
-            <strong>{{ metric.value }}</strong>
-            <span>{{ metric.label }}</span>
-            <p>{{ metric.detail }}</p>
+        <section class="profile-snapshot" aria-label="工作与开源概览">
+          <article class="snapshot-lead">
+            <span>工作经验</span>
+            <strong>3.5年</strong>
+            <p>C# 桌面应用、WPF 复杂界面、Revit/CAD 插件与工具链开发。</p>
           </article>
-          <article v-if="profile.gitHubProfile.achievements.length" class="achievement-metric">
-            <span>GitHub 成就</span>
-            <div class="achievement-inline">
-              <a
-                v-for="achievement in profile.gitHubProfile.achievements"
-                :key="achievement.slug"
-                :href="achievement.url"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <img :src="achievement.imageUrl" :alt="achievement.name" />
-                <strong>{{ achievement.name }}</strong>
-              </a>
+          <div class="snapshot-main">
+            <article class="snapshot-copy">
+              <span>目前聚焦</span>
+              <p>把工程软件里的界面、插件、数据读取和自动化流程整理成可复用的桌面工具。</p>
+            </article>
+            <div class="snapshot-stats" aria-label="开源数据">
+              <article>
+                <strong>{{ profile.openSourceProjects.length }}</strong>
+                <span>开源作品</span>
+                <p>控件库、Revit 组件、CAD/Revit 数据读取、3D 可视化。</p>
+              </article>
+              <article>
+                <strong>{{ totalStars }}</strong>
+                <span>Stars</span>
+                <p>公开仓库获得的关注。</p>
+              </article>
+              <article>
+                <strong>{{ totalForks }}</strong>
+                <span>Forks</span>
+                <p>仓库被分支引用的次数。</p>
+              </article>
             </div>
-          </article>
+          </div>
         </section>
 
         <section class="hero-about" aria-label="关于我">
@@ -201,10 +220,12 @@ onMounted(async () => {
             <article v-for="area in aboutItems" :key="area.title" class="focus-card">
               <div class="focus-card-head">
                 <span>{{ area.title }}</span>
-                <strong v-if="area.principle">{{ area.principle.title }}</strong>
+                <strong>{{ area.stack }}</strong>
               </div>
               <p>{{ area.description }}</p>
-              <p v-if="area.principle" class="principle-note">{{ area.principle.description }}</p>
+              <ul class="skill-points">
+                <li v-for="point in area.points" :key="point">{{ point }}</li>
+              </ul>
               <div class="tag-list subtle">
                 <span v-for="keyword in area.keywords" :key="keyword">{{ keyword }}</span>
               </div>

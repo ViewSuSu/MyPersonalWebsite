@@ -7,7 +7,9 @@ const profile: ProfileResponse = {
   headline: '为桌面应用开发打开一扇更清晰的小窗。',
   location: '中国浙江杭州',
   contact: {
-    phone: '',
+    phone: '15077649093',
+    qq: '1614754563',
+    wechat: '15077649093',
     email: '1614754563@qq.com',
     gitHub: 'https://github.com/ViewSuSu',
     bilibili: '小窗同学',
@@ -30,25 +32,33 @@ const profile: ProfileResponse = {
   ],
   focusAreas: [
     {
-      title: '桌面应用体验',
-      description: '把 WPF/Avalonia 的复杂界面做得安静、可控、响应快，让使用者少猜一步。',
-      keywords: ['WPF', 'Avalonia', 'MVVM', 'Prism'],
+      title: '主要技术栈',
+      stack: 'C# / WPF / Avalonia / C++',
+      description: '围绕桌面客户端、工程插件和工具链开发，长期使用 C# 与 WPF 构建复杂业务界面。',
+      points: ['熟悉 WPF / Avalonia 桌面端开发', '熟悉 MVVM、Prism、CommunityToolkit 等常用框架', '有自定义控件、组件库和工程工具平台开发经验'],
+      keywords: ['C#', 'WPF', 'Avalonia', 'C++'],
     },
     {
-      title: 'BIM / CAD 自动化',
-      description: '连接 AutoCAD、Revit 与业务系统，把图纸、模型、插件和数据流串成完整链路。',
-      keywords: ['Revit API', 'AutoCAD', 'BIM', 'Canvas'],
+      title: '桌面应用开发',
+      stack: 'MVVM / Prism / 自定义控件',
+      description: '参与大型桌面应用与工程软件研发，关注架构拆分、模块边界、性能和可维护性。',
+      points: ['负责 WPF 桌面应用架构设计与模块化开发', '处理复杂交互、动态加载、缓存和列表渲染性能问题', '沉淀 TreeView、进度条、Canvas 绘图等可复用组件'],
+      keywords: ['MVVM', 'Prism', 'CommunityToolkit', 'Canvas'],
     },
     {
-      title: 'AI 工具链',
-      description: '让 Claude Code、OpenCode、Copilot、MCP 进入真实研发流程，提高生成、调试和转换效率。',
+      title: 'AI 工程效率',
+      stack: 'Claude Code / OpenCode / Copilot / MCP',
+      description: '把 AI 编程工具用于真实工程问题，覆盖代码生成、调试测试、设计稿还原和组件迭代。',
+      points: ['使用 AI 辅助代码生成、优化、调试与测试', '通过 Figma 原型还原到 WPF 界面，提高前后端对接效率', '将 AI 能力融入开源组件设计与迭代流程'],
       keywords: ['Claude Code', 'OpenCode', 'Copilot', 'MCP'],
     },
-  ],
-  principles: [
-    { title: '先把问题可视化', description: '好的工具先让人看懂状态、边界和下一步，再谈功能堆叠。' },
-    { title: '把重复劳动产品化', description: '插件、组件、模板、流水线都是产品的一部分，能复用就不应该停留在一次性脚本。' },
-    { title: '为长期维护负责', description: '我更偏好清晰的数据结构、模块边界和自动化流程，让团队后续接得住。' },
+    {
+      title: 'Web/API 与工程化',
+      stack: 'C/S / B/S / .NET Core / GraphQL',
+      description: '具备全栈协作经验，能够对接服务端接口、数据库和部署流程，支撑桌面端与业务系统联动。',
+      points: ['熟悉 HTTP / GraphQL / WebAPI 接口开发与联调', '熟悉 MySQL、SQL Server 与数据结构设计', '熟悉 Git 工作流、NuGet 组件封装和 GitLab CI/CD'],
+      keywords: ['WebAPI', 'GraphQL', 'SQL Server', 'GitLab CI/CD'],
+    },
   ],
   openSourceProjects: [
     {
