@@ -44,7 +44,6 @@ const { toastMessage } = useClipboard()
         <span class="left">
           <strong>ViewSuSu</strong> · 小窗同学 · © {{ new Date().getFullYear() }}
         </span>
-        <span class="right">基于 Vue 3 + Vite 构建</span>
       </footer>
     </template>
 

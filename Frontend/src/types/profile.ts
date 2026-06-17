@@ -12,9 +12,22 @@ export interface ProfileResponse {
   metrics: Metric[]
   focusAreas: FocusArea[]
   openSourceProjects: Project[]
+  workProjects: WorkProject[]
   skills: SkillGroup[]
   experiences: ExperienceItem[]
   gitHubProfile: GitHubProfile
+}
+
+export interface WorkProject {
+  name: string
+  title: string
+  company: string
+  role: string
+  period: string
+  location: string
+  stack: string[]
+  description: string
+  highlights: string[]
 }
 
 export interface BeliefItem {

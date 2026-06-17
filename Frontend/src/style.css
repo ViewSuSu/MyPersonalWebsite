@@ -1162,6 +1162,21 @@ h1 .accent {
 /* =========================================================
  * Home — entry cards
  * ========================================================= */
+.home-intro {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 720px;
+  margin-top: var(--space-16);
+  padding-top: var(--space-10);
+  border-top: 1px solid var(--line);
+}
+
+.home-intro p {
+  color: var(--ink-2);
+  font-size: var(--fs-16);
+  line-height: 1.85;
+}
+
 .entry-cards {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1380,8 +1395,127 @@ h1 .accent {
 
 /* Sub-page top spacing for timeline / work-list etc. */
 .timeline,
-.work-list {
+.work-list,
+.work-projects {
   margin-top: var(--space-12);
+}
+
+/* Projects page — work-project cards */
+.work-projects {
+  display: grid;
+  gap: var(--space-8);
+}
+
+.work-project {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-8) 0;
+  border-top: 1px solid var(--line);
+}
+
+.work-project:first-child {
+  border-top: 0;
+  padding-top: var(--space-4);
+}
+
+.work-project .wp-head {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: var(--space-4);
+}
+
+.work-project .wp-head .num {
+  color: var(--accent);
+  font-family: var(--font-mono);
+  font-size: var(--fs-13);
+  letter-spacing: 0.06em;
+  padding-top: 6px;
+}
+
+.work-project .title-block h2 {
+  color: var(--ink);
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: var(--fw-semibold);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.work-project .title-block .sub {
+  margin-top: var(--space-1);
+  color: var(--ink-muted);
+  font-size: var(--fs-14);
+  line-height: 1.6;
+}
+
+.work-project .meta {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+  border-top: 1px dashed var(--line-soft, var(--line));
+  border-bottom: 1px dashed var(--line-soft, var(--line));
+}
+
+.work-project .meta > div {
+  display: grid;
+  gap: 2px;
+}
+
+.work-project .meta dt {
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  letter-spacing: 0.06em;
+}
+
+.work-project .meta dd {
+  color: var(--ink-2);
+  font-size: var(--fs-13);
+  line-height: 1.5;
+}
+
+.work-project .description {
+  color: var(--ink-2);
+  font-size: var(--fs-15);
+  line-height: 1.8;
+  max-width: 760px;
+}
+
+.work-project .highlights {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding-left: var(--space-5);
+  color: var(--ink-2);
+  font-size: var(--fs-14);
+  line-height: 1.75;
+}
+
+.work-project .highlights li {
+  list-style: disc;
+}
+
+.work-project .stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.work-project .stack span {
+  padding: 2px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 720px) {
+  .work-project .meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 /* Contact page-specific layout */

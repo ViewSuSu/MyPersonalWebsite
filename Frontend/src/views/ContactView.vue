@@ -30,7 +30,7 @@ const channels = computed<Channel[]>(() => {
 </script>
 
 <template>
-  <template v-if="profile">
+  <div class="route-view" v-if="profile">
     <header class="page-header">
       <span class="index mono">05 / 联系</span>
       <h1>聊点什么？</h1>
@@ -81,5 +81,5 @@ const channels = computed<Channel[]>(() => {
       <RouterLink to="/experience" class="back">← 04 / 经历</RouterLink>
       <RouterLink to="/" class="next">回首页 →</RouterLink>
     </nav>
-  </template>
+  </div>
 </template>

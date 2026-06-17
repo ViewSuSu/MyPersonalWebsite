@@ -34,7 +34,7 @@ function thumbFor(name: string): string | null {
 </script>
 
 <template>
-  <template v-if="profile">
+  <div class="route-view" v-if="profile">
     <header class="page-header">
       <span class="index mono">03 / 开源</span>
       <h1>开源项目</h1>
@@ -95,5 +95,5 @@ function thumbFor(name: string): string | null {
       <RouterLink to="/projects" class="back">← 02 / 项目</RouterLink>
       <RouterLink to="/experience" class="next">04 / 经历 →</RouterLink>
     </nav>
-  </template>
+  </div>
 </template>

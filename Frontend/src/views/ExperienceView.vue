@@ -6,7 +6,7 @@ const { profile } = useProfile()
 </script>
 
 <template>
-  <template v-if="profile">
+  <div class="route-view" v-if="profile">
     <header class="page-header">
       <span class="index mono">04 / 经历</span>
       <h1>工作经历</h1>
@@ -35,5 +35,5 @@ const { profile } = useProfile()
       <RouterLink to="/opensource" class="back">← 03 / 开源</RouterLink>
       <RouterLink to="/contact" class="next">05 / 联系 →</RouterLink>
     </nav>
-  </template>
+  </div>
 </template>

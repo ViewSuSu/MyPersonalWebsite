@@ -50,7 +50,7 @@ const entries = [
 </script>
 
 <template>
-  <template v-if="profile">
+  <div class="route-view" v-if="profile">
     <header id="home" class="hero">
       <p class="eyebrow">
         <span class="pulse">
@@ -92,6 +92,10 @@ const entries = [
       </div>
     </header>
 
+    <section class="home-intro" aria-label="个人介绍">
+      <p v-for="(para, i) in profile.intro" :key="i">{{ para }}</p>
+    </section>
+
     <section class="entry-cards" aria-label="章节导航">
       <RouterLink
         v-for="entry in entries"
@@ -107,5 +111,5 @@ const entries = [
         </span>
       </RouterLink>
     </section>
-  </template>
+  </div>
 </template>
