@@ -7,12 +7,19 @@ export interface ProfileResponse {
   contact: ContactInfo
   socialLinks: SocialLink[]
   summary: string
+  intro: string[]
+  beliefs: BeliefItem[]
   metrics: Metric[]
   focusAreas: FocusArea[]
   openSourceProjects: Project[]
   skills: SkillGroup[]
   experiences: ExperienceItem[]
   gitHubProfile: GitHubProfile
+}
+
+export interface BeliefItem {
+  title: string
+  body: string
 }
 
 export interface ContactInfo {
