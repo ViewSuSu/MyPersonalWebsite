@@ -3,14 +3,15 @@ import { RouterLink } from 'vue-router'
 import { useProfile } from '../composables/useProfile'
 
 const { profile } = useProfile()
+
+const logoUrl = (file: string) => `${import.meta.env.BASE_URL}company-logos/${file}`
 </script>
 
 <template>
   <div class="route-view" v-if="profile">
     <header class="page-header">
-      <span class="index mono">04 / 经历</span>
+      <span class="index mono">03 / 工作经历</span>
       <h1>工作经历</h1>
-      <p class="lead">两段工作经历，按时间倒序。具体做过的项目在 02 / 项目 页。</p>
     </header>
 
     <section class="timeline">
@@ -19,7 +20,12 @@ const { profile } = useProfile()
         :key="`${exp.company}-${exp.period}`"
         class="timeline-row"
       >
-        <span class="period">{{ exp.period }}</span>
+        <div class="timeline-meta">
+          <span class="period">{{ exp.period }}</span>
+          <span v-if="exp.logo" class="company-logo" aria-hidden="true">
+            <img :src="logoUrl(exp.logo)" :alt="exp.company + ' logo'" />
+          </span>
+        </div>
         <div class="body">
           <h3>{{ exp.company }}</h3>
           <strong class="role">{{ exp.role }}</strong>
@@ -32,8 +38,8 @@ const { profile } = useProfile()
     </section>
 
     <nav class="page-pager" aria-label="页面切换">
-      <RouterLink to="/opensource" class="back">← 03 / 开源</RouterLink>
-      <RouterLink to="/contact" class="next">05 / 联系 →</RouterLink>
+      <RouterLink to="/opensource" class="back">← 02 / 开源</RouterLink>
+      <RouterLink to="/" class="next">回首页 →</RouterLink>
     </nav>
   </div>
 </template>

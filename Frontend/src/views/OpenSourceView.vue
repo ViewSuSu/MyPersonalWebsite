@@ -36,7 +36,7 @@ function thumbFor(name: string): string | null {
 <template>
   <div class="route-view" v-if="profile">
     <header class="page-header">
-      <span class="index mono">03 / 开源</span>
+      <span class="index mono">02 / 开源</span>
       <h1>开源项目</h1>
       <p class="lead">
         固定在 GitHub 主页的 6 个仓库，全部 C# 系。覆盖控件库、Revit / CAD 插件、3D
@@ -75,15 +75,17 @@ function thumbFor(name: string): string | null {
         </div>
         <div class="side">
           <div class="stats">
-            <span :aria-label="`星标 ${formatCount(project.stars)}`">
+            <span class="stat stat-star" :aria-label="`星标 ${formatCount(project.stars)}`">
               <svg viewBox="0 0 16 16" aria-hidden="true">
                 <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.193a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.981a.75.75 0 0 1-1.088-.79l.72-4.194-3.047-2.97a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z" />
-              </svg>{{ formatCount(project.stars) }}
+              </svg>
+              <span class="count">{{ formatCount(project.stars) }}</span>
             </span>
-            <span :aria-label="`分支 ${formatCount(project.forks)}`">
+            <span class="stat stat-fork" :aria-label="`分支 ${formatCount(project.forks)}`">
               <svg viewBox="0 0 16 16" aria-hidden="true">
                 <path d="M5 3.25a2 2 0 1 0-2.75 1.854v5.792a2 2 0 1 0 1.5 0V5.104A2 2 0 0 0 5 3.25ZM3 2.75a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1Zm0 9.5a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1Zm10-7a2 2 0 1 0-2.75-1.854v.854A2.75 2.75 0 0 1 7.5 7H5.75a.75.75 0 0 0 0 1.5H7.5a4.25 4.25 0 0 0 4.25-4.25v-.854A2 2 0 0 0 13 5.25Zm0-2.5a.5.5 0 1 1 0 1 .5.5 0 0 1 0-1Z" />
-              </svg>{{ formatCount(project.forks) }}
+              </svg>
+              <span class="count">{{ formatCount(project.forks) }}</span>
             </span>
           </div>
           <span class="link">查看仓库</span>
@@ -92,8 +94,8 @@ function thumbFor(name: string): string | null {
     </section>
 
     <nav class="page-pager" aria-label="页面切换">
-      <RouterLink to="/projects" class="back">← 02 / 项目</RouterLink>
-      <RouterLink to="/experience" class="next">04 / 经历 →</RouterLink>
+      <RouterLink to="/projects" class="back">← 01 / 项目经历</RouterLink>
+      <RouterLink to="/experience" class="next">03 / 工作经历 →</RouterLink>
     </nav>
   </div>
 </template>

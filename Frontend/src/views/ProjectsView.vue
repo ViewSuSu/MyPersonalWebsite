@@ -8,8 +8,8 @@ const { profile } = useProfile()
 <template>
   <div class="route-view" v-if="profile">
     <header class="page-header">
-      <span class="index mono">02 / 项目</span>
-      <h1>工作中的项目</h1>
+      <span class="index mono">01 / 项目经历</span>
+      <h1>项目经历</h1>
       <p class="lead">
         在公司任职期间主导或参与的工程项目。出于保密考虑，下文仅描述角色、做了什么、
         技术栈与可量化的成果，不涉及客户信息与内部界面。
@@ -50,8 +50,8 @@ const { profile } = useProfile()
     </section>
 
     <nav class="page-pager" aria-label="页面切换">
-      <RouterLink to="/about" class="back">← 01 / 关于</RouterLink>
-      <RouterLink to="/opensource" class="next">03 / 开源 →</RouterLink>
+      <RouterLink to="/" class="back">← 回首页</RouterLink>
+      <RouterLink to="/opensource" class="next">02 / 开源 →</RouterLink>
     </nav>
   </div>
 </template>

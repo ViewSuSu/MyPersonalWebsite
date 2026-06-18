@@ -23,11 +23,12 @@ const profile: ProfileResponse = {
     { platform: '知乎', handle: '小窗同学', url: null },
   ],
   summary:
-    '我是小窗同学（苏畅），3.5 年 C# / WPF 桌面工程师。常年和 WPF、Revit / CAD 插件、AI 工具链打交道，把工程软件里的界面、插件和数据流，整理成清晰、稳定、可维护的桌面工具。目前在 不鸣科技 做引擎工具链中的 WPF UI 平台框架。',
+    '我是小窗同学（苏畅），C# 中级开发工程师，3.5 年工作经验。主要技术栈 C# / WPF / Avalonia / C++。目前在 牛股王 负责 PC 客户端维护与新功能开发，主攻新业务产线"量化业务" PC 端。',
   intro: [
-    '写代码十年（其中桌面方向 3.5 年）。从 C++ 起步、走 C# 主线，做过工程软件主程、控件库设计、CAD/Revit 插件、3D 可视化，目前在 不鸣科技 Chaos 引擎工具组做内部的 WPF UI 平台框架。',
-    '我喜欢把复杂的工作流拆开、再重新组装成清晰的工具。比起写聪明的代码，更在意可读性、稳定性，以及"明确为某个用户解决某个问题"。同样的需求，能用一个小工具解决，就不开一个大平台。',
-    '不喜欢花哨没用的抽象、为了套框架而套框架、和"差不多就行了"。如果说我有什么风格，大概是：先把问题搞清楚，再让代码足够无聊。',
+    'C# 中级开发工程师，3.5 年工作经验。主要技术栈 C# / WPF / Avalonia / C++。目前在 牛股王 负责 PC 客户端维护与新功能开发，主攻新业务产线"量化业务" PC 端。',
+    '熟悉 WPF / Avalonia 桌面端开发，熟悉基于 MVVM 的大型桌面端应用方法论，熟练使用 Prism、CommunityToolkit 等主流框架，熟悉自定义控件。',
+    '擅长借助 Claude Code、OpenCode、Copilot 和 MCP 等 AI 编程工具解决实际工程问题；探索过 Figma 原型还原到 WPF 界面的 AI 工作流，提升设计与前端的对接效率。',
+    '另有 1.5 年全栈开发经历，熟悉 C/S、B/S 架构与 Spring Boot、.NET Core、HTTP / GraphQL、WebAPI、Nginx 等技术栈。热爱编程，开源项目累计 100+ Star，NuGet 组件累计 4w+ 下载量。',
   ],
   beliefs: [
     {
@@ -48,7 +49,7 @@ const profile: ProfileResponse = {
     },
   ],
   metrics: [
-    { label: '3.5年', value: '工作经验', caption: '桌面应用开发、WPF、Revit、CAD' },
+    { label: '3.5年', value: '工作经验', caption: 'C# / WPF / Avalonia / 桌面方向' },
     { label: '5', value: '精选开源项目', caption: '从控件库到 BIM 自动化' },
     { label: '79', value: '开源星标', caption: '来自精选公开仓库' },
     { label: '9', value: '公开仓库', caption: '持续沉淀工具项目' },
@@ -160,11 +161,43 @@ const profile: ProfileResponse = {
   ],
   workProjects: [
     {
+      name: '牛股王量化 · PC 客户端',
+      title: '量化业务 PC 端 · 0 → 1 建设',
+      company: '牛股王',
+      role: 'PC 端开发工程师',
+      period: '2026-06 — 至今',
+      location: '浙江杭州',
+      stack: ['C#', 'WPF', 'Avalonia', 'MVVM'],
+      description:
+        '承接公司新业务产线"量化业务"的 PC 端从 0 到 1 建设，搭建桌面客户端架构与核心模块，对接量化策略与服务端数据，承载量化交易场景下的桌面端交互。',
+      highlights: [
+        '主导量化业务 PC 客户端的架构选型与目录分层，沉淀通用基础设施。',
+        '负责核心模块开发：行情/策略数据接入、策略管理、量化交易工作流界面。',
+        '与服务端、量化策略团队协同设计接口与数据契约，保证桌面端与策略服务端的稳定联动。',
+      ],
+    },
+    {
+      name: '牛股王 PC 客户端',
+      title: '牛股王 PC 端维护与新功能开发',
+      company: '牛股王',
+      role: 'PC 端开发工程师',
+      period: '2026-06 — 至今',
+      location: '浙江杭州',
+      stack: ['C#', 'WPF', 'Avalonia'],
+      description:
+        '负责牛股王 PC 客户端的日常维护、性能优化与新功能迭代，保证现有桌面端业务稳定上线，并配合产品/服务端推进新功能在 PC 端的落地。',
+      highlights: [
+        '承接 PC 客户端的 bug 修复、性能调优与版本迭代。',
+        '推进新需求在 PC 端的功能落地，覆盖从方案评审、开发自测到灰度上线全流程。',
+        '梳理历史代码并按模块逐步重构，降低长期维护成本。',
+      ],
+    },
+    {
       name: 'Chaos 引擎 · UI/UX 框架',
       title: 'Chaos 引擎工具链 C# / WPF UI/UX 框架',
       company: '不鸣科技',
       role: '自研引擎工具链开发工程师 · ET-引擎工具组',
-      period: '2026-03 — 至今',
+      period: '2026-03 — 2026-05',
       location: '浙江杭州',
       stack: ['C#', 'WPF', 'Figma MCP', 'Claude Code', 'XAML'],
       description:
@@ -250,10 +283,23 @@ const profile: ProfileResponse = {
   ],
   experiences: [
     {
+      company: '牛股王',
+      role: 'PC 端开发工程师',
+      period: '2026-06 - 至今',
+      location: '浙江杭州',
+      logo: 'niuguwang.png',
+      highlights: [
+        '负责牛股王 PC 客户端的日常维护、性能优化与新功能开发，保障现有桌面端业务持续稳定迭代。',
+        '主导新业务产线"量化业务"PC 端从 0 到 1 的建设：架构搭建、核心模块开发、服务端联调。',
+        '与产品、服务端、量化策略团队协同，明确桌面端在量化交易工作流中的能力边界与交互方案。',
+      ],
+    },
+    {
       company: '不鸣科技',
       role: '自研引擎工具链开发工程师 / ET-引擎工具组',
-      period: '2026-03 - 至今',
+      period: '2026-03 - 2026-05',
       location: '浙江杭州',
+      logo: 'booming.png',
       highlights: [
         '参与 Chaos 引擎工具链中的 C#/WPF UI/UX 平台框架研发。',
         '推进 AI、Figma 设计稿转 WPF 界面、配置编辑和自动化开发链路。',
@@ -265,6 +311,7 @@ const profile: ProfileResponse = {
       role: '主程序',
       period: '2023-06 - 2026-02',
       location: '浙江杭州',
+      logo: 'huiyuan.png',
       highlights: [
         '主导 C#/.NET/WPF 桌面端架构设计，落地 MVVM、Prism、依赖注入和常用设计模式，支撑复杂工程业务流程。',
         '负责核心模块、任务拆分和代码架构，参与现场调研、原型设计、开发测试到上线交付的完整研发流程。',

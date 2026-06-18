@@ -8,16 +8,10 @@ const routes = [
     meta: { title: '小窗同学 · ViewSuSu' },
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import('../views/AboutView.vue'),
-    meta: { title: '关于 · 小窗同学' },
-  },
-  {
     path: '/projects',
     name: 'projects',
     component: () => import('../views/ProjectsView.vue'),
-    meta: { title: '项目 · 小窗同学' },
+    meta: { title: '项目经历 · 小窗同学' },
   },
   {
     path: '/opensource',
@@ -29,13 +23,7 @@ const routes = [
     path: '/experience',
     name: 'experience',
     component: () => import('../views/ExperienceView.vue'),
-    meta: { title: '经历 · 小窗同学' },
-  },
-  {
-    path: '/contact',
-    name: 'contact',
-    component: () => import('../views/ContactView.vue'),
-    meta: { title: '联系 · 小窗同学' },
+    meta: { title: '工作经历 · 小窗同学' },
   },
   {
     path: '/:pathMatch(.*)*',
@@ -46,8 +34,24 @@ const routes = [
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes,
-  scrollBehavior(_, __, savedPosition) {
+  scrollBehavior(to, _from, savedPosition) {
     if (savedPosition) return savedPosition
+    if (to.hash) {
+      return new Promise((resolve) => {
+        const target = to.hash
+        const tryScroll = (attempt = 0) => {
+          const el = document.querySelector(target)
+          if (el) {
+            resolve({ el: target, behavior: 'smooth', top: 72 })
+          } else if (attempt >= 30) {
+            resolve({ top: 0 })
+          } else {
+            setTimeout(() => tryScroll(attempt + 1), 50)
+          }
+        }
+        tryScroll()
+      })
+    }
     return { top: 0, behavior: 'smooth' }
   },
 })

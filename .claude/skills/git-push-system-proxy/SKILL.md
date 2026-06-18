@@ -1,16 +1,20 @@
 ---
 name: git-push-system-proxy
-description: 本机直连 GitHub 超时时，复用 Windows 系统代理（GitHub Desktop 走的同一份）通过 `git -c` 临时注入完成推送/拉取。当 git push / fetch / pull / clone 报 "Failed to connect to github.com port 443" 或 "Could not resolve host" 时触发；正常联网下不要使用。
+description: GitHub 推送/拉取的代理 fallback：本机直连 + GitHub Desktop 自带 git 都不通时，复用 Windows 系统代理通过 `git -c` 临时注入完成推送。优先用全局 skill [[github-desktop-git-push]]；只有那条路径也失败时才走这条。
 ---
 
-# git-push-system-proxy
+# git-push-system-proxy（fallback）
+
+## 优先级提示
+
+> 本 skill 是 **fallback**。GitHub 推送的首选是全局 skill **[[github-desktop-git-push]]**（用 GitHub Desktop 自带 git 的 schannel TLS 直连）。只有自带 git 也连不通时，才回到这条用系统代理的路径。
 
 ## 触发场景
 
-满足以下任一条件：
+满足以下**全部**条件：
 
-- 用户要求向 `github.com` 推送 / 拉取（`git push`、`git fetch`、`git pull`、`git clone github.com/...`）。
-- 上一次 `git` 联网命令报错：`Failed to connect to github.com port 443`、`Could not resolve host github.com`、`Recv failure: Connection was reset`。
+- 用户要求向 `github.com` 推送 / 拉取。
+- 已经尝试过 [[github-desktop-git-push]]，仍然报 `Failed to connect`、`Could not resolve host`、`Recv failure: Connection was reset`。
 
 如果用户网络环境直连 GitHub 正常（无报错先例、显式声明不走代理），**不要主动注入代理**。
 

@@ -89,6 +89,7 @@ export interface ExperienceItem {
   period: string
   location: string
   highlights: string[]
+  logo?: string
 }
 
 export interface GitHubProfile {

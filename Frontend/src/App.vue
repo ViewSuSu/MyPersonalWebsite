@@ -26,11 +26,11 @@ const { toastMessage } = useClipboard()
           <small>/ 小窗同学</small>
         </RouterLink>
         <div class="nav-links">
-          <RouterLink to="/about"><span class="num">01</span> 关于</RouterLink>
-          <RouterLink to="/projects"><span class="num">02</span> 项目</RouterLink>
-          <RouterLink to="/opensource"><span class="num">03</span> 开源</RouterLink>
-          <RouterLink to="/experience"><span class="num">04</span> 经历</RouterLink>
-          <RouterLink to="/contact"><span class="num">05</span> 联系</RouterLink>
+          <RouterLink to="/"><span class="num">00</span> 首页</RouterLink>
+          <RouterLink to="/projects"><span class="num">01</span> 项目经历</RouterLink>
+          <RouterLink to="/opensource"><span class="num">02</span> 开源</RouterLink>
+          <RouterLink to="/experience"><span class="num">03</span> 工作经历</RouterLink>
+          <RouterLink :to="{ path: '/', hash: '#contact' }"><span class="num">04</span> 联系</RouterLink>
         </div>
       </nav>
 
