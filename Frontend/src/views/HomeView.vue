@@ -145,9 +145,51 @@ const channels = computed<Channel[]>(() => {
           v-for="(area, i) in profile.focusAreas"
           :key="area.title"
           class="about-row"
+          :data-icon="area.icon"
         >
           <div class="index">
-            <span>{{ String(i + 1).padStart(2, '0') }}</span>
+            <span class="focus-icon" aria-hidden="true">
+              <svg
+                v-if="area.icon === 'stack'"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+              >
+                <polyline points="8 7 3 12 8 17" />
+                <polyline points="16 7 21 12 16 17" />
+                <line x1="14" y1="5" x2="10" y2="19" />
+              </svg>
+              <svg
+                v-else-if="area.icon === 'desktop'"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+              >
+                <rect x="3" y="4" width="18" height="13" rx="1.5" />
+                <line x1="3" y1="14" x2="21" y2="14" />
+                <line x1="9" y1="20" x2="15" y2="20" />
+                <line x1="12" y1="17" x2="12" y2="20" />
+              </svg>
+              <svg
+                v-else-if="area.icon === 'ai'"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+              >
+                <path d="M12 3l1.6 4.4L18 9l-4.4 1.6L12 15l-1.6-4.4L6 9l4.4-1.6L12 3Z" />
+                <path d="M18 14l.8 2.2L21 17l-2.2.8L18 20l-.8-2.2L15 17l2.2-.8L18 14Z" />
+              </svg>
+              <svg
+                v-else-if="area.icon === 'api'"
+                viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+              >
+                <rect x="3" y="4" width="18" height="5" rx="1.2" />
+                <rect x="3" y="15" width="18" height="5" rx="1.2" />
+                <line x1="7" y1="6.5" x2="7.01" y2="6.5" />
+                <line x1="7" y1="17.5" x2="7.01" y2="17.5" />
+                <line x1="11" y1="6.5" x2="17" y2="6.5" />
+                <line x1="11" y1="17.5" x2="17" y2="17.5" />
+              </svg>
+            </span>
+            <span class="focus-num mono">{{ String(i + 1).padStart(2, '0') }}</span>
             <strong>{{ area.title }}</strong>
           </div>
           <div class="body">

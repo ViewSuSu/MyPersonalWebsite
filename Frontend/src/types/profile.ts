@@ -63,7 +63,10 @@ export interface FocusArea {
   description: string
   points: string[]
   keywords: string[]
+  icon?: FocusAreaIcon
 }
+
+export type FocusAreaIcon = 'stack' | 'desktop' | 'ai' | 'api'
 
 export interface Project {
   name: string
