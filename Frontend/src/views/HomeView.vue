@@ -4,80 +4,97 @@ import { RouterLink } from 'vue-router'
 import { useProfile } from '../composables/useProfile'
 import { useClipboard } from '../composables/useClipboard'
 import { useNuGet, formatCount } from '../composables/useNuGet'
+import { useLocale } from '../composables/useLocale'
+import { getHomeProfile, getChannelLabel } from '../i18n/messages'
 import RichText, { type RichLink } from '../components/RichText.vue'
 
 const { profile } = useProfile()
 const { copyToClipboard } = useClipboard()
 const { totalDownloads, loaded: nugetLoaded, fetchNuGet } = useNuGet()
+const { t, locale } = useLocale()
 
 onMounted(() => fetchNuGet())
 
-const heroMeta = computed(() => {
-  if (!profile.value) return []
-  return [
-    { label: '坐标', value: profile.value.location.replace('中国', '') },
-    { label: '当下', value: '牛股王 · PC 端 / 量化业务' },
-    { label: '经验', value: '3.5 年' },
-    { label: 'GitHub', value: '@ViewSuSu' },
-  ]
-})
+const heroMeta = computed(() => [
+  { label: t('meta.label.location'), value: t('meta.value.location') },
+  { label: t('meta.label.now'), value: t('meta.value.now') },
+  { label: t('meta.label.years'), value: t('meta.value.years') },
+  { label: t('meta.label.github'), value: t('meta.value.github') },
+])
 
 const nugetCountText = computed(() =>
   nugetLoaded.value ? formatCount(totalDownloads.value) : '4w+',
 )
 
-const displayIntro = computed(() => {
-  if (!profile.value) return []
-  return profile.value.intro.map((para) => {
-    if (/NuGet 组件累计/.test(para)) {
+const homeBundle = computed(() => getHomeProfile(locale.value))
+
+const displayIntro = computed(() =>
+  homeBundle.value.intro.map((para) => {
+    if (locale.value === 'zh' && /NuGet 组件累计/.test(para)) {
       return para.replace(
         /NuGet 组件累计 [^ ]+ 下载量/,
         `NuGet 组件累计 ${nugetCountText.value} 下载量`,
       )
     }
+    if (locale.value === 'en' && /NuGet downloads/.test(para)) {
+      return para.replace(/40k\+ NuGet downloads/, `${nugetCountText.value} NuGet downloads`)
+    }
     return para
-  })
+  }),
+)
+
+const introLinks = computed<RichLink[]>(() => {
+  if (locale.value === 'zh') {
+    return [
+      {
+        match: '开源项目累计 100+ Star',
+        href: 'https://github.com/ViewSuSu?tab=repositories',
+        external: true,
+      },
+      {
+        match: `NuGet 组件累计 ${nugetCountText.value} 下载量`,
+        href: '#/nuget',
+        external: false,
+      },
+    ]
+  }
+  return [
+    {
+      match: '100+ stars across open-source repos',
+      href: 'https://github.com/ViewSuSu?tab=repositories',
+      external: true,
+    },
+    {
+      match: `${nugetCountText.value} NuGet downloads`,
+      href: '#/nuget',
+      external: false,
+    },
+  ]
 })
 
-const introLinks = computed<RichLink[]>(() => [
+const entries = computed(() => [
   {
-    match: '开源项目累计 100+ Star',
-    href: 'https://github.com/ViewSuSu?tab=repositories',
-    external: true,
-  },
-  {
-    match: `NuGet 组件累计 ${nugetCountText.value} 下载量`,
-    href: '#/nuget',
-    external: false,
-  },
-])
-
-const entries = [
-  {
-    to: '/projects',
+    to: '/experience',
     num: '01',
-    title: '项目经历',
-    excerpt: '在公司任职期间主导或参与的工程项目,按领域归类。',
+    title: t('entry.experience.title'),
+    excerpt: t('entry.experience.excerpt'),
+    tooltip: t('tt.entry.experience'),
   },
   {
     to: '/opensource',
     num: '02',
-    title: '开源',
-    excerpt: 'GitHub 上 pin 的 6 个仓库,覆盖控件库、插件与桌面应用。',
-  },
-  {
-    to: '/experience',
-    num: '03',
-    title: '工作经历',
-    excerpt: '三段工作经历,按时间排列。',
+    title: t('entry.opensource.title'),
+    excerpt: t('entry.opensource.excerpt'),
+    tooltip: t('tt.entry.opensource'),
   },
   {
     to: '/nuget',
-    num: '04',
-    title: 'NuGet 组件',
-    excerpt: '发布在 NuGet 的 C# / WPF / Revit 组件，下载量实时拉取。',
+    num: '03',
+    title: t('entry.nuget.title'),
+    excerpt: t('entry.nuget.excerpt'),
+    tooltip: t('tt.entry.nuget'),
   },
-]
+])
 
 interface Channel {
   key: string
@@ -95,12 +112,12 @@ const channels = computed<Channel[]>(() => {
   if (!profile.value) return []
   const c = profile.value.contact
   return [
-    { key: 'email', label: '邮箱', value: c.email, icon: brandIcon('mail') },
-    { key: 'github', label: 'GitHub', value: '@ViewSuSu', icon: brandIcon('github'), href: c.gitHub, external: true },
-    { key: 'bilibili', label: '哔哩哔哩', value: c.bilibili, icon: brandIcon('bilibili'), href: 'https://space.bilibili.com/381527816', external: true },
-    { key: 'qq', label: 'QQ', value: c.qq, icon: brandIcon('qq') },
-    { key: 'wechat', label: '微信', value: c.wechat, icon: brandIcon('wechat') },
-    { key: 'phone', label: '电话', value: c.phone, icon: brandIcon('phone') },
+    { key: 'email', label: getChannelLabel(locale.value, 'email'), value: c.email, icon: brandIcon('mail') },
+    { key: 'github', label: getChannelLabel(locale.value, 'github'), value: '@ViewSuSu', icon: brandIcon('github'), href: c.gitHub, external: true },
+    { key: 'bilibili', label: getChannelLabel(locale.value, 'bilibili'), value: c.bilibili, icon: brandIcon('bilibili'), href: 'https://space.bilibili.com/381527816', external: true },
+    { key: 'qq', label: getChannelLabel(locale.value, 'qq'), value: c.qq, icon: brandIcon('qq') },
+    { key: 'wechat', label: getChannelLabel(locale.value, 'wechat'), value: c.wechat, icon: brandIcon('wechat') },
+    { key: 'phone', label: getChannelLabel(locale.value, 'phone'), value: c.phone, icon: brandIcon('phone') },
   ]
 })
 </script>
@@ -114,35 +131,49 @@ const channels = computed<Channel[]>(() => {
       </figure>
 
       <p class="eyebrow">
-        <RouterLink class="pulse pulse-link" :to="{ path: '/', hash: '#contact' }">
+        <RouterLink
+          class="pulse pulse-link"
+          :to="{ path: '/', hash: '#contact' }"
+          :data-tooltip="t('tt.hero.pulse')"
+        >
           <span class="pulse-dot" aria-hidden="true"></span>
-          在职 · 接商业合作
+          {{ t('hero.eyebrow.status') }}
           <span class="arrow" aria-hidden="true">↓</span>
         </RouterLink>
-        <span>// c# · wpf · 桌面工具链</span>
+        <span>{{ t('hero.eyebrow.tech') }}</span>
       </p>
 
       <h1>
-        打开一扇<br />
-        更<span class="accent">清晰</span>的小窗。
+        {{ t('hero.h1.lead') }}<br />
+        <template v-if="locale === 'zh'">
+          更<span class="accent">{{ t('hero.h1.accent') }}</span>{{ t('hero.h1.tail') }}
+        </template>
+        <template v-else>
+          <span class="accent">{{ t('hero.h1.accent') }}</span> {{ t('hero.h1.tail') }}
+        </template>
       </h1>
 
       <p class="summary">
-        <span class="ink">小窗同学 / 苏畅</span> — C# 中级开发工程师，<span class="rt-num">3.5</span> 年工作经验，主要技术栈 C# / WPF / Avalonia / C++。目前在
-        <span class="ink">牛股王</span> 负责 PC 客户端维护与新功能开发，主攻新业务产线"量化业务" PC 端。
+        <span class="ink">{{ t('hero.summary.name') }}</span> — {{ t('hero.summary.role') }}，<span class="rt-num">{{ t('hero.summary.years') }}</span> {{ t('hero.summary.expBefore') }}
+        <span class="ink">{{ t('hero.summary.companyName') }}</span> {{ t('hero.summary.expAfter') }}
       </p>
 
       <div class="hero-actions">
-        <a class="btn btn-primary" href="#about-me">
-          了解我 <span class="arrow" aria-hidden="true">↓</span>
+        <a
+          class="btn btn-primary"
+          href="#about-me"
+          :data-tooltip="t('tt.hero.cta.about')"
+        >
+          {{ t('hero.cta.about') }} <span class="arrow" aria-hidden="true">↓</span>
         </a>
         <a
           class="btn btn-ghost"
           :href="profile.contact.gitHub"
           target="_blank"
           rel="noreferrer"
+          :data-tooltip="t('tt.hero.cta.github')"
         >
-          GitHub <span class="arrow" aria-hidden="true">↗</span>
+          {{ t('hero.cta.github') }} <span class="arrow" aria-hidden="true">↗</span>
         </a>
       </div>
 
@@ -162,8 +193,8 @@ const channels = computed<Channel[]>(() => {
             <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8" />
           </svg>
         </span>
-        <h2>我是谁</h2>
-        <span class="index mono">— intro</span>
+        <h2>{{ t('section.about.h2') }}</h2>
+        <span class="index mono">{{ t('section.about.index') }}</span>
       </div>
       <div class="home-intro">
         <RichText
@@ -184,12 +215,12 @@ const channels = computed<Channel[]>(() => {
             <path d="m15.5 8.5-2.4 5.1-5.1 2.4 2.4-5.1 5.1-2.4Z" />
           </svg>
         </span>
-        <h2>关注的方向</h2>
-        <span class="index mono">— focus</span>
+        <h2>{{ t('section.focus.h2') }}</h2>
+        <span class="index mono">{{ t('section.focus.index') }}</span>
       </div>
       <div class="about-list">
         <article
-          v-for="(area, i) in profile.focusAreas"
+          v-for="(area, i) in homeBundle.focusAreas"
           :key="area.title"
           class="about-row"
           :data-icon="area.icon"
@@ -260,8 +291,8 @@ const channels = computed<Channel[]>(() => {
             <path d="M14 17.5h7m-3.5-3.5v7" />
           </svg>
         </span>
-        <h2>探索</h2>
-        <span class="index mono">— work</span>
+        <h2>{{ t('section.work.h2') }}</h2>
+        <span class="index mono">{{ t('section.work.index') }}</span>
       </div>
       <div class="entry-cards">
         <RouterLink
@@ -270,12 +301,13 @@ const channels = computed<Channel[]>(() => {
           :to="entry.to"
           class="entry-card"
           :data-num="entry.num"
+          :data-tooltip="entry.tooltip"
         >
           <span class="num mono">{{ entry.num }}</span>
           <h2>{{ entry.title }}</h2>
           <p>{{ entry.excerpt }}</p>
           <span class="enter">
-            进入 <span class="arrow" aria-hidden="true">↗</span>
+            {{ t('entry.enter') }} <span class="arrow" aria-hidden="true">↗</span>
           </span>
         </RouterLink>
       </div>
@@ -289,19 +321,28 @@ const channels = computed<Channel[]>(() => {
             <path d="M8 11h8M8 14h5" />
           </svg>
         </span>
-        <h2>聊点什么</h2>
-        <span class="index mono">— contact</span>
+        <h2>{{ t('section.contact.h2') }}</h2>
+        <span class="index mono">{{ t('section.contact.index') }}</span>
       </div>
       <p class="home-block-lead">
-        桌面端项目、WPF 控件库、Revit / CAD 插件或 AI
-        工具链相关的合作和交流,邮我,或在任意平台找我都可以。
+        {{ t('contact.lead') }}
       </p>
 
       <div class="contact-cta">
-        <a class="btn btn-primary" :href="`mailto:${profile.contact.email}`">
+        <a
+          class="btn btn-primary"
+          :href="`mailto:${profile.contact.email}`"
+          :data-tooltip="t('tt.contact.email')"
+        >
           {{ profile.contact.email }} <span class="arrow" aria-hidden="true">↗</span>
         </a>
-        <a class="btn btn-ghost" :href="profile.contact.gitHub" target="_blank" rel="noreferrer">
+        <a
+          class="btn btn-ghost"
+          :href="profile.contact.gitHub"
+          target="_blank"
+          rel="noreferrer"
+          :data-tooltip="t('tt.contact.github')"
+        >
           @ViewSuSu <span class="arrow" aria-hidden="true">↗</span>
         </a>
       </div>
@@ -314,8 +355,9 @@ const channels = computed<Channel[]>(() => {
             :href="ch.href"
             :target="ch.external ? '_blank' : undefined"
             :rel="ch.external ? 'noreferrer' : undefined"
+            :data-tooltip="`${t('tt.channel.open')} — ${ch.label}`"
           >
-            <span class="ch-icon" aria-hidden="true"><img :src="ch.icon" :alt="''" /></span>
+            <span class="ch-icon" aria-hidden="true"><img :src="ch.icon" :alt="''" width="22" height="22" /></span>
             <span class="key">{{ ch.label }}</span>
             <span class="value">{{ ch.value }}</span>
             <span class="arrow" aria-hidden="true">↗</span>
@@ -324,14 +366,14 @@ const channels = computed<Channel[]>(() => {
             v-else
             type="button"
             class="channel"
-            :title="`点击复制 ${ch.label}`"
-            :aria-label="`复制 ${ch.label}:${ch.value}`"
+            :data-tooltip="`${t('tt.channel.copy')} ${ch.label}: ${ch.value}`"
+            :aria-label="`${t('tt.channel.copy')} ${ch.label}: ${ch.value}`"
             @click="copyToClipboard(ch.value, ch.label)"
           >
-            <span class="ch-icon" aria-hidden="true"><img :src="ch.icon" :alt="''" /></span>
+            <span class="ch-icon" aria-hidden="true"><img :src="ch.icon" :alt="''" width="22" height="22" /></span>
             <span class="key">{{ ch.label }}</span>
             <span class="value">{{ ch.value }}</span>
-            <span class="arrow" aria-hidden="true">复制</span>
+            <span class="arrow" aria-hidden="true">{{ t('channel.copy') }}</span>
           </button>
         </template>
       </div>

@@ -1,35 +1,30 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { getRouteTitle, type Locale } from '../i18n/messages'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: () => import('../views/HomeView.vue'),
-    meta: { title: '小窗同学 · ViewSuSu' },
   },
   {
     path: '/projects',
-    name: 'projects',
-    component: () => import('../views/ProjectsView.vue'),
-    meta: { title: '项目经历 · 小窗同学' },
+    redirect: '/experience',
   },
   {
     path: '/opensource',
     name: 'opensource',
     component: () => import('../views/OpenSourceView.vue'),
-    meta: { title: '开源 · 小窗同学' },
   },
   {
     path: '/experience',
     name: 'experience',
     component: () => import('../views/ExperienceView.vue'),
-    meta: { title: '工作经历 · 小窗同学' },
   },
   {
     path: '/nuget',
     name: 'nuget',
     component: () => import('../views/NuGetView.vue'),
-    meta: { title: 'NuGet 组件 · 小窗同学' },
   },
   {
     path: '/:pathMatch(.*)*',
@@ -62,9 +57,17 @@ const router = createRouter({
   },
 })
 
+function readStoredLocale(): Locale {
+  if (typeof window === 'undefined') return 'zh'
+  const stored = window.localStorage.getItem('site.locale') as Locale | null
+  if (stored === 'zh' || stored === 'en') return stored
+  const navLang = window.navigator.language?.toLowerCase() ?? ''
+  return navLang.startsWith('en') ? 'en' : 'zh'
+}
+
 router.afterEach((to) => {
-  const title = (to.meta?.title as string | undefined) ?? '小窗同学'
-  document.title = title
+  const name = typeof to.name === 'string' ? to.name : 'home'
+  document.title = getRouteTitle(name, readStoredLocale())
 })
 
 export default router

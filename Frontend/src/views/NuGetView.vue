@@ -2,7 +2,9 @@
 import { onMounted, computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useNuGet, formatCount } from '../composables/useNuGet'
+import { useLocale } from '../composables/useLocale'
 import RichText from '../components/RichText.vue'
+import { format } from '../i18n/messages'
 
 const {
   packages,
@@ -14,6 +16,8 @@ const {
   packageCount,
   fetchNuGet,
 } = useNuGet()
+
+const { t } = useLocale()
 
 onMounted(() => fetchNuGet())
 
@@ -28,45 +32,47 @@ const fetchedAtText = computed(() => {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`
 })
 
+const refreshTooltip = computed(() =>
+  fetchedAtText.value
+    ? format(t('tt.nuget.refresh.with.time'), { time: fetchedAtText.value })
+    : t('tt.nuget.refresh'),
+)
+
+const refreshLabel = computed(() =>
+  loading.value ? t('nuget.refresh.label.loading') : t('nuget.refresh.label'),
+)
+
 function packageUrl(id: string) {
   return `https://www.nuget.org/packages/${id}`
-}
-
-function packageBadgeUrl(id: string) {
-  return `https://img.shields.io/nuget/dt/${id}?style=flat&label=downloads`
 }
 </script>
 
 <template>
   <div class="route-view nuget-view">
     <header class="page-header">
-      <span class="index mono">04 / NuGet</span>
+      <span class="index mono">{{ t('nuget.index') }}</span>
       <h1>
-        NuGet 组件
+        {{ t('nuget.h1') }}
         <button
           class="header-refresh"
           type="button"
-          :title="fetchedAtText ? `上次更新 ${fetchedAtText}` : '刷新'"
-          :aria-label="loading ? '刷新中' : '刷新'"
+          :data-tooltip="refreshTooltip"
+          :aria-label="refreshLabel"
           :disabled="loading"
           @click="fetchNuGet(true)"
         >
           <span :class="{ spin: loading }" aria-hidden="true">↻</span>
         </button>
       </h1>
-      <p class="lead">
-        发布在
-        <a href="https://www.nuget.org/profiles/Su1614" target="_blank" rel="noreferrer">nuget.org/profiles/Su1614</a>
-        的 C# / WPF / Revit 组件包。
-      </p>
+      <p class="lead">{{ t('nuget.lead') }}</p>
 
       <div class="nuget-stats" v-if="loaded">
         <div class="stat-card">
-          <span class="label">已发布组件</span>
+          <span class="label">{{ t('nuget.stats.count') }}</span>
           <strong class="value mono">{{ packageCount }}</strong>
         </div>
         <div class="stat-card">
-          <span class="label">累计下载</span>
+          <span class="label">{{ t('nuget.stats.downloads') }}</span>
           <strong class="value mono accent">
             {{ totalDownloads.toLocaleString() }}
           </strong>
@@ -75,12 +81,17 @@ function packageBadgeUrl(id: string) {
       </div>
 
       <div class="nuget-state" v-else-if="loading">
-        <span class="dot" aria-hidden="true"></span> 正在拉取 NuGet 数据…
+        <span class="dot" aria-hidden="true"></span> {{ t('nuget.state.loading') }}
       </div>
 
       <div class="nuget-state error" v-else-if="error">
-        <span aria-hidden="true">⚠</span> 拉取失败：{{ error }}
-        <button class="refresh" type="button" @click="fetchNuGet(true)">重试</button>
+        <span aria-hidden="true">⚠</span> {{ format(t('nuget.state.error'), { msg: error }) }}
+        <button
+          class="refresh"
+          type="button"
+          :data-tooltip="t('tt.nuget.refresh')"
+          @click="fetchNuGet(true)"
+        >{{ t('nuget.state.retry') }}</button>
       </div>
     </header>
 
@@ -92,6 +103,7 @@ function packageBadgeUrl(id: string) {
         :href="packageUrl(pkg.id)"
         target="_blank"
         rel="noreferrer"
+        :data-tooltip="t('tt.nuget.item')"
       >
         <div class="head">
           <span class="num mono">{{ String(i + 1).padStart(2, '0') }}</span>
@@ -102,33 +114,25 @@ function packageBadgeUrl(id: string) {
         <RichText tag="p" class="desc" :text="pkg.description" />
 
         <div class="tags">
-          <span v-for="t in pkg.tags.slice(0, 6)" :key="t">{{ t }}</span>
+          <span v-for="tag in pkg.tags.slice(0, 6)" :key="tag">{{ tag }}</span>
         </div>
 
         <div class="metrics">
           <span class="metric primary">
-            <span class="m-label">downloads</span>
+            <span class="m-label">{{ t('nuget.metric.downloads') }}</span>
             <strong class="m-value">{{ pkg.totalDownloads.toLocaleString() }}</strong>
           </span>
           <span class="metric">
-            <span class="m-label">authors</span>
+            <span class="m-label">{{ t('nuget.metric.authors') }}</span>
             <span class="m-value">{{ pkg.authors.join(', ') }}</span>
-          </span>
-          <span class="metric">
-            <img
-              class="badge"
-              :src="packageBadgeUrl(pkg.id)"
-              :alt="`${pkg.id} downloads badge`"
-              loading="lazy"
-            />
           </span>
         </div>
       </a>
     </section>
 
-    <nav class="page-pager" aria-label="页面切换">
-      <RouterLink to="/experience" class="back">← 03 / 工作经历</RouterLink>
-      <RouterLink to="/" class="next">回首页 →</RouterLink>
+    <nav class="page-pager" :aria-label="t('nav.contact')">
+      <RouterLink to="/opensource" class="back" :data-tooltip="t('tt.pager.back.opensource')">{{ t('nuget.pager.back') }}</RouterLink>
+      <RouterLink to="/" class="next" :data-tooltip="t('tt.pager.back')">{{ t('nuget.pager.next') }}</RouterLink>
     </nav>
   </div>
 </template>

@@ -23,9 +23,9 @@ const profile: ProfileResponse = {
     { platform: '知乎', handle: '小窗同学', url: null },
   ],
   summary:
-    '我是小窗同学（苏畅），C# 中级开发工程师，3.5 年工作经验。主要技术栈 C# / WPF / Avalonia / C++。目前在 牛股王 负责 PC 客户端维护与新功能开发，主攻新业务产线"量化业务" PC 端。',
+    '我是小窗同学（苏畅），C# 中级开发工程师，3.5 年工作经验。主要技术栈 C# / WPF / Avalonia / C++。目前在 上海海能证券投资顾问有限公司 负责旗下产品 牛股王 的 PC 客户端维护与新功能开发，主攻新业务产线"量化业务" PC 端。',
   intro: [
-    'C# 中级开发工程师，3.5 年工作经验。主要技术栈 C# / WPF / Avalonia / C++。目前在 牛股王 负责 PC 客户端维护与新功能开发，主攻新业务产线"量化业务" PC 端。',
+    'C# 中级开发工程师，3.5 年工作经验。主要技术栈 C# / WPF / Avalonia / C++。目前在 上海海能证券投资顾问有限公司 负责旗下产品 牛股王 的 PC 客户端维护与新功能开发，主攻新业务产线"量化业务" PC 端。',
     '熟悉 WPF / Avalonia 桌面端开发，熟悉基于 MVVM 的大型桌面端应用方法论，熟练使用 Prism、CommunityToolkit 等主流框架，熟悉自定义控件。',
     '擅长借助 Claude Code、OpenCode、Copilot 和 MCP 等 AI 编程工具解决实际工程问题；探索过 Figma 原型还原到 WPF 界面的 AI 工作流，提升设计与前端的对接效率。',
     '另有 1.5 年全栈开发经历，熟悉 C/S、B/S 架构与 Spring Boot、.NET Core、HTTP / GraphQL、WebAPI、Nginx 等技术栈。热爱编程，开源项目累计 100+ Star，NuGet 组件累计 4w+ 下载量。',
@@ -167,7 +167,7 @@ const profile: ProfileResponse = {
     {
       name: '牛股王量化 · PC 客户端',
       title: '量化业务 PC 端 · 0 → 1 建设',
-      company: '牛股王',
+      company: '上海海能证券投资顾问有限公司',
       role: 'PC 端开发工程师',
       period: '2026-06 — 至今',
       location: '浙江杭州',
@@ -183,7 +183,7 @@ const profile: ProfileResponse = {
     {
       name: '牛股王 PC 客户端',
       title: '牛股王 PC 端维护与新功能开发',
-      company: '牛股王',
+      company: '上海海能证券投资顾问有限公司',
       role: 'PC 端开发工程师',
       period: '2026-06 — 至今',
       location: '浙江杭州',
@@ -287,8 +287,8 @@ const profile: ProfileResponse = {
   ],
   experiences: [
     {
-      company: '牛股王',
-      role: 'PC 端开发工程师',
+      company: '上海海能证券投资顾问有限公司',
+      role: 'PC 端开发工程师 · 牛股王',
       period: '2026-06 - 至今',
       location: '浙江杭州',
       logo: 'niuguwang.png',
