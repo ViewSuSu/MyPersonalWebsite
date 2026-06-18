@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { useProfile } from '../composables/useProfile'
+import RichText from '../components/RichText.vue'
 
 const { profile } = useProfile()
 
@@ -31,7 +32,7 @@ const logoUrl = (file: string) => `${import.meta.env.BASE_URL}company-logos/${fi
           <strong class="role">{{ exp.role }}</strong>
           <p class="location">{{ exp.location }}</p>
           <ul>
-            <li v-for="h in exp.highlights" :key="h">{{ h }}</li>
+            <li v-for="h in exp.highlights" :key="h"><RichText :text="h" /></li>
           </ul>
         </div>
       </article>

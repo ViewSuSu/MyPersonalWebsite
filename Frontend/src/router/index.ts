@@ -26,6 +26,12 @@ const routes = [
     meta: { title: '工作经历 · 小窗同学' },
   },
   {
+    path: '/nuget',
+    name: 'nuget',
+    component: () => import('../views/NuGetView.vue'),
+    meta: { title: 'NuGet 组件 · 小窗同学' },
+  },
+  {
     path: '/:pathMatch(.*)*',
     redirect: '/',
   },

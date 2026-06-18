@@ -1,11 +1,16 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useProfile } from '../composables/useProfile'
 import { useClipboard } from '../composables/useClipboard'
+import { useNuGet, formatCount } from '../composables/useNuGet'
+import RichText, { type RichLink } from '../components/RichText.vue'
 
 const { profile } = useProfile()
 const { copyToClipboard } = useClipboard()
+const { totalDownloads, loaded: nugetLoaded, fetchNuGet } = useNuGet()
+
+onMounted(() => fetchNuGet())
 
 const heroMeta = computed(() => {
   if (!profile.value) return []
@@ -16,6 +21,36 @@ const heroMeta = computed(() => {
     { label: 'GitHub', value: '@ViewSuSu' },
   ]
 })
+
+const nugetCountText = computed(() =>
+  nugetLoaded.value ? formatCount(totalDownloads.value) : '4w+',
+)
+
+const displayIntro = computed(() => {
+  if (!profile.value) return []
+  return profile.value.intro.map((para) => {
+    if (/NuGet 组件累计/.test(para)) {
+      return para.replace(
+        /NuGet 组件累计 [^ ]+ 下载量/,
+        `NuGet 组件累计 ${nugetCountText.value} 下载量`,
+      )
+    }
+    return para
+  })
+})
+
+const introLinks = computed<RichLink[]>(() => [
+  {
+    match: '开源项目累计 100+ Star',
+    href: 'https://github.com/ViewSuSu?tab=repositories',
+    external: true,
+  },
+  {
+    match: `NuGet 组件累计 ${nugetCountText.value} 下载量`,
+    href: '#/nuget',
+    external: false,
+  },
+])
 
 const entries = [
   {
@@ -35,6 +70,12 @@ const entries = [
     num: '03',
     title: '工作经历',
     excerpt: '三段工作经历,按时间排列。',
+  },
+  {
+    to: '/nuget',
+    num: '04',
+    title: 'NuGet 组件',
+    excerpt: '发布在 NuGet 的 C# / WPF / Revit 组件，下载量实时拉取。',
   },
 ]
 
@@ -87,7 +128,7 @@ const channels = computed<Channel[]>(() => {
       </h1>
 
       <p class="summary">
-        <span class="ink">小窗同学 / 苏畅</span> — C# 中级开发工程师，3.5 年工作经验，主要技术栈 C# / WPF / Avalonia / C++。目前在
+        <span class="ink">小窗同学 / 苏畅</span> — C# 中级开发工程师，<span class="rt-num">3.5</span> 年工作经验，主要技术栈 C# / WPF / Avalonia / C++。目前在
         <span class="ink">牛股王</span> 负责 PC 客户端维护与新功能开发，主攻新业务产线"量化业务" PC 端。
       </p>
 
@@ -125,7 +166,13 @@ const channels = computed<Channel[]>(() => {
         <span class="index mono">— intro</span>
       </div>
       <div class="home-intro">
-        <p v-for="(para, i) in profile.intro" :key="i">{{ para }}</p>
+        <RichText
+          v-for="(para, i) in displayIntro"
+          :key="i"
+          tag="p"
+          :text="para"
+          :links="introLinks"
+        />
       </div>
     </section>
 
@@ -193,7 +240,7 @@ const channels = computed<Channel[]>(() => {
             <strong>{{ area.title }}</strong>
           </div>
           <div class="body">
-            <p>{{ area.description }}</p>
+            <RichText tag="p" :text="area.description" />
             <span class="stack">{{ area.stack }}</span>
             <div class="tags">
               <span v-for="kw in area.keywords" :key="kw">{{ kw }}</span>

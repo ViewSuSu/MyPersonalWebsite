@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { RouterLink } from 'vue-router'
 import { useProfile } from '../composables/useProfile'
 import type { Project } from '../types/profile'
+import RichText from '../components/RichText.vue'
 
 const { profile } = useProfile()
 
@@ -68,7 +69,7 @@ function thumbFor(name: string): string | null {
             <h3>{{ project.name }}</h3>
             <span class="category">{{ project.category }}</span>
           </div>
-          <p>{{ project.description }}</p>
+          <RichText tag="p" :text="project.description" />
           <div class="tags">
             <span v-for="tag in projectTags(project)" :key="tag">{{ tag }}</span>
           </div>

@@ -30,7 +30,8 @@ const { toastMessage } = useClipboard()
           <RouterLink to="/projects"><span class="num">01</span> 项目经历</RouterLink>
           <RouterLink to="/opensource"><span class="num">02</span> 开源</RouterLink>
           <RouterLink to="/experience"><span class="num">03</span> 工作经历</RouterLink>
-          <RouterLink :to="{ path: '/', hash: '#contact' }"><span class="num">04</span> 联系</RouterLink>
+          <RouterLink to="/nuget"><span class="num">04</span> NuGet</RouterLink>
+          <RouterLink :to="{ path: '/', hash: '#contact' }"><span class="num">05</span> 联系</RouterLink>
         </div>
       </nav>
 

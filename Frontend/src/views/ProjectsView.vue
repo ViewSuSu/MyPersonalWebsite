@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import { useProfile } from '../composables/useProfile'
+import RichText from '../components/RichText.vue'
 
 const { profile } = useProfile()
 </script>
@@ -37,10 +38,10 @@ const { profile } = useProfile()
           <div><dt>坐标</dt><dd>{{ project.location }}</dd></div>
         </dl>
 
-        <p class="description">{{ project.description }}</p>
+        <RichText tag="p" class="description" :text="project.description" />
 
         <ul class="highlights">
-          <li v-for="h in project.highlights" :key="h">{{ h }}</li>
+          <li v-for="h in project.highlights" :key="h"><RichText :text="h" /></li>
         </ul>
 
         <div class="stack">
