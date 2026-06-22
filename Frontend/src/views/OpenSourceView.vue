@@ -5,6 +5,7 @@ import { useProfile } from '../composables/useProfile'
 import { useLocale } from '../composables/useLocale'
 import type { Project } from '../types/profile'
 import RichText from '../components/RichText.vue'
+import LazyImage from '../components/LazyImage.vue'
 import { format, localizeOpenSourceProject } from '../i18n/messages'
 
 const { profile } = useProfile()
@@ -13,11 +14,11 @@ const { t, locale } = useLocale()
 const assetUrl = (path: string) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
 
 const repoThumb: Record<string, string> = {
-  BlackGoldAncientSword: assetUrl('github-assets/blackgold/02_stats.png'),
-  'NarakaBladepoint-WPF': assetUrl('github-assets/naraka/MainWindows.png'),
-  'Su.WPF.TreeViewEx': assetUrl('github-assets/treeview/HD.gif'),
-  'Su.Revit.UI.StatusBarEx': assetUrl('github-assets/statusbar/HD.gif'),
-  'Su.Revit.HelixToolkit.SharpDX': assetUrl('github-assets/helix/HD.gif'),
+  BlackGoldAncientSword: assetUrl('github-assets/blackgold/02_stats.webp'),
+  'NarakaBladepoint-WPF': assetUrl('github-assets/naraka/MainWindows.webp'),
+  'Su.WPF.TreeViewEx': assetUrl('github-assets/treeview/HD.webp'),
+  'Su.Revit.UI.StatusBarEx': assetUrl('github-assets/statusbar/HD.webp'),
+  'Su.Revit.HelixToolkit.SharpDX': assetUrl('github-assets/helix/HD.webp'),
 }
 
 const projects = computed<Project[]>(() => {
@@ -64,13 +65,13 @@ function thumbFor(name: string): string | null {
         :data-tooltip="format(t('tt.os.open'), { name: project.name })"
       >
         <figure class="thumb" :class="{ 'is-placeholder': !thumbFor(project.name) }">
-          <img
+          <LazyImage
             v-if="thumbFor(project.name)"
             :src="thumbFor(project.name)!"
             :alt="format(t('os.repo.thumb'), { title: project.title })"
-            loading="lazy"
-            width="180"
-            height="112"
+            :width="180"
+            :height="112"
+            object-fit="cover"
           />
           <span v-else class="placeholder-label">{{ project.name.split('.')[0] }}</span>
         </figure>

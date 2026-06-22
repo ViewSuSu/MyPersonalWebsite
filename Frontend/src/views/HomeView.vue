@@ -7,6 +7,7 @@ import { useNuGet, formatCount } from '../composables/useNuGet'
 import { useLocale } from '../composables/useLocale'
 import { getHomeProfile, getChannelLabel } from '../i18n/messages'
 import RichText, { type RichLink } from '../components/RichText.vue'
+import LazyImage from '../components/LazyImage.vue'
 
 const { profile } = useProfile()
 const { copyToClipboard } = useClipboard()
@@ -126,7 +127,14 @@ const channels = computed<Channel[]>(() => {
   <div class="route-view" v-if="profile">
     <header id="home" class="hero">
       <figure class="hero-avatar" aria-hidden="true">
-        <img :src="`${baseUrl}avatar.png`" alt="小窗同学 头像" width="96" height="96" />
+        <LazyImage
+          :src="`${baseUrl}avatar.webp`"
+          alt="小窗同学 头像"
+          :width="96"
+          :height="96"
+          object-fit="cover"
+          eager
+        />
         <span class="status-dot"></span>
       </figure>
 
@@ -357,7 +365,7 @@ const channels = computed<Channel[]>(() => {
             :rel="ch.external ? 'noreferrer' : undefined"
             :data-tooltip="`${t('tt.channel.open')} — ${ch.label}`"
           >
-            <span class="ch-icon" aria-hidden="true"><img :src="ch.icon" :alt="''" width="22" height="22" /></span>
+            <span class="ch-icon" aria-hidden="true"><LazyImage :src="ch.icon" alt="" :width="22" :height="22" object-fit="contain" /></span>
             <span class="key">{{ ch.label }}</span>
             <span class="value">{{ ch.value }}</span>
             <span class="arrow" aria-hidden="true">↗</span>
@@ -370,7 +378,7 @@ const channels = computed<Channel[]>(() => {
             :aria-label="`${t('tt.channel.copy')} ${ch.label}: ${ch.value}`"
             @click="copyToClipboard(ch.value, ch.label)"
           >
-            <span class="ch-icon" aria-hidden="true"><img :src="ch.icon" :alt="''" width="22" height="22" /></span>
+            <span class="ch-icon" aria-hidden="true"><LazyImage :src="ch.icon" alt="" :width="22" :height="22" object-fit="contain" /></span>
             <span class="key">{{ ch.label }}</span>
             <span class="value">{{ ch.value }}</span>
             <span class="arrow" aria-hidden="true">{{ t('channel.copy') }}</span>

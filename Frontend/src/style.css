@@ -138,60 +138,79 @@
   color-scheme: dark;
 }
 
-/* Light mode (opt-in via system) — keep palette compatible */
-@media (prefers-color-scheme: light) {
-  :root {
-    --bg: #f5f6f8;
-    --bg-2: #ffffff;
-    --surface: rgba(0, 0, 0, 0.025);
-    --surface-2: rgba(0, 0, 0, 0.05);
-    --surface-3: rgba(0, 0, 0, 0.075);
-    --line: rgba(15, 23, 42, 0.10);
-    --line-strong: rgba(15, 23, 42, 0.18);
-    --ink: #0a0a0a;
-    --ink-2: #1a1a1a;
-    --ink-muted: #4a4a4a;
-    --ink-soft: #6b6b6b;
-    --ink-faint: #a3a3a3;
-    --accent: #0a8275;
-    --accent-ink: #ffffff;
-    --accent-soft: rgba(10, 130, 117, 0.14);
-    --accent-hover: #086b61;
-    --hot: #d23866;
-    --hot-2: #e07a2c;
-    --hot-soft: rgba(210, 56, 102, 0.16);
-    --hot-glow: rgba(210, 56, 102, 0.4);
-    --grad-spike: linear-gradient(135deg, #d23866 0%, #e07a2c 50%, #d4a017 100%);
-    --grad-cool: linear-gradient(135deg, #0a8275 0%, #4f5fd1 100%);
-    --grad-text: linear-gradient(120deg, #d23866 0%, #8a3dd1 55%, #0a8275 100%);
-    --elev-1:
-      0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
-      0 1px 2px rgba(15, 20, 30, 0.06),
-      0 2px 8px -2px rgba(15, 20, 30, 0.07);
-    --elev-2:
-      0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
-      0 2px 4px rgba(15, 20, 30, 0.08),
-      0 8px 20px -6px rgba(15, 20, 30, 0.1);
-    --elev-3:
-      0 1px 0 0 rgba(255, 255, 255, 1) inset,
-      0 4px 8px rgba(15, 20, 30, 0.08),
-      0 16px 40px -10px rgba(15, 20, 30, 0.14);
-    --hairline-top: linear-gradient(90deg,
-      transparent 0%,
-      rgba(255, 255, 255, 0.8) 30%,
-      rgba(255, 255, 255, 1) 50%,
-      rgba(255, 255, 255, 0.8) 70%,
-      transparent 100%);
-    --surface-grad:
-      linear-gradient(180deg,
-        rgba(255, 255, 255, 0.6) 0%,
-        rgba(255, 255, 255, 0.3) 100%);
-    --surface-grad-hover:
-      linear-gradient(180deg,
-        rgba(255, 255, 255, 0.85) 0%,
-        rgba(255, 255, 255, 0.5) 100%);
-    color-scheme: light;
-  }
+/* Light mode — opt-in via [data-theme="light"] on <html>, set by JS at boot. */
+:root[data-theme="light"] {
+  --bg: #f5f6f8;
+  --bg-2: #ffffff;
+  --surface: rgba(0, 0, 0, 0.025);
+  --surface-2: rgba(0, 0, 0, 0.05);
+  --surface-3: rgba(0, 0, 0, 0.075);
+  --line: rgba(15, 23, 42, 0.10);
+  --line-strong: rgba(15, 23, 42, 0.18);
+  --ink: #0a0a0a;
+  --ink-2: #1a1a1a;
+  --ink-muted: #4a4a4a;
+  --ink-soft: #6b6b6b;
+  --ink-faint: #a3a3a3;
+  --accent: #0a8275;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(10, 130, 117, 0.14);
+  --accent-hover: #086b61;
+  --hot: #d23866;
+  --hot-2: #e07a2c;
+  --hot-soft: rgba(210, 56, 102, 0.16);
+  --hot-glow: rgba(210, 56, 102, 0.4);
+  --grad-spike: linear-gradient(135deg, #d23866 0%, #e07a2c 50%, #d4a017 100%);
+  --grad-cool: linear-gradient(135deg, #0a8275 0%, #4f5fd1 100%);
+  --grad-text: linear-gradient(120deg, #d23866 0%, #8a3dd1 55%, #0a8275 100%);
+  --elev-1:
+    0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 1px 2px rgba(15, 20, 30, 0.06),
+    0 2px 8px -2px rgba(15, 20, 30, 0.07);
+  --elev-2:
+    0 1px 0 0 rgba(255, 255, 255, 0.9) inset,
+    0 2px 4px rgba(15, 20, 30, 0.08),
+    0 8px 20px -6px rgba(15, 20, 30, 0.1);
+  --elev-3:
+    0 1px 0 0 rgba(255, 255, 255, 1) inset,
+    0 4px 8px rgba(15, 20, 30, 0.08),
+    0 16px 40px -10px rgba(15, 20, 30, 0.14);
+  --hairline-top: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.8) 30%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 0.8) 70%,
+    transparent 100%);
+  --surface-grad:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.6) 0%,
+      rgba(255, 255, 255, 0.3) 100%);
+  --surface-grad-hover:
+    linear-gradient(180deg,
+      rgba(255, 255, 255, 0.85) 0%,
+      rgba(255, 255, 255, 0.5) 100%);
+  color-scheme: light;
+}
+
+/* Smooth theme transitions for major surfaces — opt-in via :root for cascade reach. */
+:root {
+  --theme-transition: background var(--t-slow), color var(--t-slow),
+    border-color var(--t-slow), box-shadow var(--t-slow);
+}
+
+html,
+body,
+.topbar,
+.entry-card,
+.belief,
+.channels .channel,
+.nuget-item,
+.nuget-stats .stat-card,
+.work-item .stats .stat,
+.timeline-row .company-logo,
+.theme-toggle,
+.lang-toggle {
+  transition: var(--theme-transition);
 }
 
 /* =========================================================
@@ -249,25 +268,23 @@ body::after {
   mix-blend-mode: overlay;
 }
 
-@media (prefers-color-scheme: light) {
-  body {
-    background:
-      radial-gradient(1100px 620px at 14% -8%, rgba(10, 130, 117, 0.16), transparent 60%),
-      radial-gradient(820px 520px at 92% -14%, rgba(140, 87, 229, 0.16), transparent 55%),
-      radial-gradient(720px 460px at 50% 118%, rgba(10, 170, 150, 0.12), transparent 60%),
-      radial-gradient(560px 360px at 80% 60%, rgba(210, 56, 102, 0.10), transparent 65%),
-      linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
-    background-attachment: fixed;
-  }
-  body::before {
-    background-image:
-      linear-gradient(to right, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
-  }
-  body::after {
-    opacity: 0.06;
-    mix-blend-mode: multiply;
-  }
+:root[data-theme="light"] body {
+  background:
+    radial-gradient(1100px 620px at 14% -8%, rgba(10, 130, 117, 0.16), transparent 60%),
+    radial-gradient(820px 520px at 92% -14%, rgba(140, 87, 229, 0.16), transparent 55%),
+    radial-gradient(720px 460px at 50% 118%, rgba(10, 170, 150, 0.12), transparent 60%),
+    radial-gradient(560px 360px at 80% 60%, rgba(210, 56, 102, 0.10), transparent 65%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 50%, var(--bg) 100%);
+  background-attachment: fixed;
+}
+:root[data-theme="light"] body::before {
+  background-image:
+    linear-gradient(to right, rgba(15, 23, 42, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.045) 1px, transparent 1px);
+}
+:root[data-theme="light"] body::after {
+  opacity: 0.06;
+  mix-blend-mode: multiply;
 }
 
 #app {
@@ -432,6 +449,113 @@ header[id] {
 @keyframes sk-shimmer {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
+}
+
+/* =========================================================
+ * LazyImage — IntersectionObserver-gated <img> with skeleton
+ * shimmer placeholder and click-to-retry overlay on error.
+ * Wrapping span fills its parent container; consumers control
+ * the box (e.g. .thumb 180x112, .company-logo 160x160).
+ * ========================================================= */
+.lazy-image {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  line-height: 0;
+  border-radius: inherit;
+}
+
+.lazy-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity var(--t-slow);
+}
+
+.lazy-image.loaded img {
+  opacity: 1;
+}
+
+.lazy-image[data-fit="cover"] img {
+  object-fit: cover;
+}
+
+.lazy-image[data-fit="contain"] img {
+  object-fit: contain;
+}
+
+.lazy-image-skeleton {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background: linear-gradient(
+    90deg,
+    var(--surface),
+    var(--surface-2) 50%,
+    var(--surface)
+  );
+  background-size: 200% 100%;
+  animation: sk-shimmer 1.6s ease-in-out infinite;
+}
+
+.lazy-image-retry {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-3);
+  border: 1px dashed color-mix(in srgb, var(--danger) 60%, var(--line-strong));
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--bg-2) 88%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: var(--danger);
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-align: center;
+  cursor: pointer;
+  transition: background var(--t), color var(--t), border-color var(--t);
+}
+
+.lazy-image-retry svg {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  transition: transform var(--t);
+}
+
+.lazy-image-retry:hover {
+  background: color-mix(in srgb, var(--danger) 14%, var(--bg-2));
+  color: var(--ink);
+  border-color: var(--danger);
+}
+
+.lazy-image-retry:hover svg {
+  transform: rotate(-90deg);
+}
+
+.lazy-image-retry:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lazy-image-skeleton {
+    animation: none;
+  }
+  .lazy-image-retry:hover svg {
+    transform: none;
+  }
 }
 
 /* =========================================================
@@ -705,9 +829,7 @@ header[id] {
   opacity: 0.55;
 }
 
-@media (prefers-color-scheme: light) {
-  .hero::after { opacity: 0.32; }
-}
+:root[data-theme="light"] .hero::after { opacity: 0.32; }
 
 .hero-avatar {
   position: relative;
@@ -1244,10 +1366,8 @@ h1 .accent {
   color: #9aa3ad;
 }
 
-@media (prefers-color-scheme: light) {
-  .work-item .stats .stat-fork svg {
-    color: #57606a;
-  }
+:root[data-theme="light"] .work-item .stats .stat-fork svg {
+  color: #57606a;
 }
 
 .work-item:hover .stats .stat {
@@ -2955,6 +3075,127 @@ h1 .accent {
 }
 
 /* =========================================================
+ * Theme toggle (topbar) — animated sun ↔ moon icon button.
+ * Implementation inspired by Adam Argyle's web.dev sun-and-moon
+ * pattern: a single SVG where the sun circle is bitten by a moving
+ * mask circle to form the crescent, while the rays rotate + fade.
+ * Animations are gated on [data-theme="dark"] (set by JS at boot).
+ * ========================================================= */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-left: var(--space-2);
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--surface-grad), var(--bg-2);
+  color: var(--ink-muted);
+  cursor: pointer;
+  box-shadow: var(--elev-1);
+  transition: color var(--t), border-color var(--t), box-shadow var(--t),
+    background var(--t), transform var(--t-fast);
+}
+
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line-strong));
+  box-shadow: var(--elev-2);
+  transform: translateY(-1px);
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.theme-toggle .sun-and-moon {
+  width: 20px;
+  height: 20px;
+}
+
+.theme-toggle .sun-and-moon > .sun,
+.theme-toggle .sun-and-moon > .moon,
+.theme-toggle .sun-and-moon > .sun-beams {
+  transform-origin: center center;
+}
+
+.theme-toggle .sun-and-moon > .sun {
+  fill: currentColor;
+  transition: transform 0.5s cubic-bezier(0.5, 1.25, 0.75, 1.25);
+}
+
+.theme-toggle .sun-and-moon > .sun-beams {
+  stroke: currentColor;
+  stroke-width: 2px;
+  stroke-linecap: round;
+  transition: transform 0.5s cubic-bezier(0.5, 1.5, 0.75, 1.25),
+    opacity 0.5s cubic-bezier(0.25, 0, 0.3, 1);
+}
+
+.theme-toggle .sun-and-moon > .moon > circle {
+  transition: transform 0.25s cubic-bezier(0, 0, 0, 1);
+}
+
+@supports (cx: 1) {
+  .theme-toggle .sun-and-moon > .moon > circle {
+    transition: cx 0.25s cubic-bezier(0, 0, 0, 1);
+  }
+}
+
+/* Dark state: shrink rays, expand circle, slide mask circle in to bite crescent. */
+:root[data-theme="dark"] .theme-toggle .sun-and-moon > .sun {
+  transform: scale(1.75);
+  transition-timing-function: cubic-bezier(0.25, 0, 0.3, 1);
+  transition-duration: 0.25s;
+}
+
+:root[data-theme="dark"] .theme-toggle .sun-and-moon > .sun-beams {
+  transform: rotateZ(-25deg);
+  opacity: 0;
+  transition-duration: 0.15s;
+}
+
+:root[data-theme="dark"] .theme-toggle .sun-and-moon > .moon > circle {
+  transform: translateX(-7px);
+  transition-delay: 0.25s;
+  transition-duration: 0.5s;
+}
+
+@supports (cx: 1) {
+  :root[data-theme="dark"] .theme-toggle .sun-and-moon > .moon > circle {
+    transform: translateX(0);
+    cx: 17;
+    transition: cx 0.5s cubic-bezier(0, 0, 0, 1) 0.25s;
+  }
+}
+
+/* Light state ↔ hover: gentle wiggle on the rays for personality. */
+.theme-toggle:hover .sun-and-moon > .sun-beams {
+  transform: rotateZ(15deg);
+}
+
+:root[data-theme="dark"] .theme-toggle:hover .sun-and-moon > .sun {
+  transform: scale(1.85);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle .sun-and-moon > .sun,
+  .theme-toggle .sun-and-moon > .sun-beams,
+  .theme-toggle .sun-and-moon > .moon > circle {
+    transition-duration: 0.001ms !important;
+  }
+  .theme-toggle:hover {
+    transform: none;
+  }
+  .theme-toggle:hover .sun-and-moon > .sun-beams {
+    transform: none;
+  }
+}
+
+/* =========================================================
  * Language toggle (topbar)
  * ========================================================= */
 .lang-toggle {
@@ -3298,6 +3539,326 @@ a[href] {
     flex: 0 0 auto;
     margin-left: auto;
   }
+
+  .theme-toggle {
+    flex: 0 0 auto;
+    margin-left: auto;
+    width: 32px;
+    height: 32px;
+  }
+
+  .theme-toggle + .lang-toggle {
+    margin-left: var(--space-1);
+  }
+}
+
+/* =========================================================
+ * Tablet portrait (601-900) — keep multi-column grids
+ * where the 900px breakpoint would otherwise collapse to 1 col.
+ * ========================================================= */
+@media (min-width: 601px) and (max-width: 900px) {
+  .home-block .entry-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .beliefs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .channels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .nuget-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .work-project .meta {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .work-item {
+    grid-template-columns: 140px minmax(0, 1fr);
+    gap: var(--space-4);
+  }
+
+  .work-item .thumb {
+    width: 140px;
+    height: 88px;
+  }
+
+  .work-item .side {
+    grid-column: 1 / -1;
+    justify-items: start;
+  }
+
+  .timeline-row {
+    grid-template-columns: 130px minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  .timeline::before {
+    left: 144px;
+  }
+
+  .timeline-row::before {
+    left: 138px;
+  }
+
+  .timeline-row .company-logo {
+    width: 120px;
+    height: 120px;
+    padding: var(--space-3);
+  }
+
+  .about-row {
+    grid-template-columns: 150px minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+}
+
+/* =========================================================
+ * Small phones (<=480) — tighten outer rhythm so content
+ * doesn't feel sparse and stays on one finger-scroll.
+ * ========================================================= */
+@media (max-width: 480px) {
+  .site-shell {
+    width: calc(100% - var(--space-4));
+    padding: var(--space-3) 0 var(--space-12);
+  }
+
+  .section-block {
+    margin-top: var(--space-16);
+  }
+
+  .home-block {
+    margin-top: var(--space-16);
+    padding-top: var(--space-8);
+  }
+
+  .hero {
+    padding: var(--space-16) 0 var(--space-6);
+  }
+
+  .hero h1 {
+    font-size: clamp(36px, 11vw, 64px);
+  }
+
+  .hero .summary {
+    font-size: var(--fs-16);
+  }
+
+  .hero-actions .btn {
+    flex: 1 1 calc(50% - var(--space-2));
+    padding: 0 var(--space-3);
+    min-width: 0;
+  }
+
+  .hero-meta {
+    gap: var(--space-2) var(--space-4);
+    font-size: var(--fs-12);
+  }
+
+  .page-header {
+    padding: var(--space-12) 0 var(--space-8);
+  }
+
+  .page-header h1 {
+    font-size: clamp(28px, 9vw, 44px);
+  }
+
+  .contact-block {
+    margin-top: var(--space-16);
+    padding: var(--space-10) 0;
+  }
+
+  .contact-block h2 {
+    font-size: clamp(32px, 11vw, 56px);
+  }
+
+  .home-section-heading {
+    padding-bottom: var(--space-4);
+  }
+
+  .home-section-heading .icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .home-section-heading .icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .home-section-heading h2 {
+    font-size: clamp(18px, 5.5vw, 22px);
+  }
+
+  .featured-project {
+    padding: var(--space-8) 0;
+  }
+
+  .featured-project h3 {
+    font-size: clamp(22px, 7vw, 28px);
+  }
+
+  .gallery-wall {
+    grid-auto-rows: 140px;
+    padding: var(--space-2);
+  }
+
+  .about-row {
+    padding: var(--space-6) 0 var(--space-6) var(--space-2);
+  }
+
+  .about-row .body p {
+    font-size: var(--fs-14);
+  }
+
+  .work-item {
+    padding: var(--space-6) 0;
+  }
+
+  .work-item .thumb {
+    height: 160px;
+  }
+
+  .work-item h3 {
+    font-size: var(--fs-20);
+  }
+
+  .work-item p {
+    font-size: var(--fs-14);
+  }
+
+  .timeline-row {
+    padding: var(--space-6) 0;
+  }
+
+  .timeline-row .body h3 {
+    font-size: var(--fs-18);
+  }
+
+  .timeline-row .body ul {
+    margin-top: var(--space-4);
+  }
+
+  .timeline-row .body .exp-projects {
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+  }
+
+  .timeline-row .body .exp-projects .work-project {
+    padding: var(--space-4) 0;
+  }
+
+  .work-project {
+    padding: var(--space-6) 0;
+  }
+
+  .work-project .title-block h2 {
+    font-size: clamp(20px, 6vw, 26px);
+  }
+
+  .work-project .meta {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
+    padding: var(--space-3) 0;
+  }
+
+  .work-project .description {
+    font-size: var(--fs-14);
+  }
+
+  .work-project .highlights {
+    font-size: var(--fs-13);
+  }
+
+  .entry-card {
+    padding: var(--space-5);
+  }
+
+  .entry-card h2 {
+    font-size: var(--fs-18);
+  }
+
+  .entry-card::before {
+    font-size: 110px;
+    bottom: -28px;
+  }
+
+  .belief {
+    padding: var(--space-4);
+  }
+
+  .belief h3 {
+    font-size: var(--fs-15);
+  }
+
+  .belief p {
+    font-size: var(--fs-13);
+  }
+
+  .nuget-item {
+    padding: var(--space-5);
+  }
+
+  .nuget-item .head h3 {
+    font-size: var(--fs-18);
+  }
+
+  .nuget-item .metric.primary .m-value {
+    font-size: var(--fs-20);
+  }
+
+  .nuget-item .metrics {
+    gap: var(--space-3);
+  }
+
+  .nuget-stats .stat-card {
+    padding: var(--space-4) var(--space-5);
+  }
+
+  .nuget-stats .stat-card .value {
+    font-size: var(--fs-24);
+  }
+
+  .channels .channel {
+    grid-template-columns: 22px minmax(56px, auto) minmax(0, 1fr) auto;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-4);
+  }
+
+  .channels .channel .ch-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .channels .channel .ch-icon img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .channels .channel .value {
+    font-size: var(--fs-13);
+  }
+
+  .channels .channel .key {
+    font-size: 11px;
+  }
+
+  .topbar {
+    padding: var(--space-2);
+    gap: var(--space-1);
+  }
+
+  .topbar .brand small {
+    display: none;
+  }
+
+  .topbar .brand {
+    font-size: var(--fs-13);
+  }
 }
 
 /* =========================================================
@@ -3308,10 +3869,8 @@ a[href] {
   --ink-faint: #6b6b6b;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --ink-faint: #8a8a8a;
-  }
+:root[data-theme="light"] {
+  --ink-faint: #8a8a8a;
 }
 
 /* =========================================================
@@ -3319,66 +3878,62 @@ a[href] {
  * from disappearing on the light card surface.
  * Adds a subtle checkered tint behind the logo.
  * ========================================================= */
-@media (prefers-color-scheme: light) {
-  .timeline-row .company-logo {
-    background:
-      linear-gradient(135deg, #1a1d24 0%, #0f1320 100%);
-    border-color: rgba(15, 23, 42, 0.18);
-    box-shadow:
-      0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
-      0 1px 2px rgba(15, 23, 42, 0.08),
-      0 4px 10px -2px rgba(15, 23, 42, 0.12);
-  }
+:root[data-theme="light"] .timeline-row .company-logo {
+  background:
+    linear-gradient(135deg, #1a1d24 0%, #0f1320 100%);
+  border-color: rgba(15, 23, 42, 0.18);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
+    0 1px 2px rgba(15, 23, 42, 0.08),
+    0 4px 10px -2px rgba(15, 23, 42, 0.12);
 }
 
 /* =========================================================
  * Card-surface lift in light mode — entry-cards, belief,
  * channel, stat-card. Edges were nearly invisible.
  * ========================================================= */
-@media (prefers-color-scheme: light) {
-  .entry-card,
-  .belief,
-  .channels .channel,
-  .nuget-stats .stat-card,
-  .nuget-item,
-  .work-item .stats .stat {
-    background:
-      linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
-    border-color: rgba(15, 23, 42, 0.12);
-    box-shadow:
-      0 1px 0 0 rgba(255, 255, 255, 1) inset,
-      0 1px 2px rgba(15, 23, 42, 0.06),
-      0 4px 12px -2px rgba(15, 23, 42, 0.08);
-  }
+:root[data-theme="light"] .entry-card,
+:root[data-theme="light"] .belief,
+:root[data-theme="light"] .channels .channel,
+:root[data-theme="light"] .nuget-stats .stat-card,
+:root[data-theme="light"] .nuget-item,
+:root[data-theme="light"] .work-item .stats .stat {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #fafbfc 100%);
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 1) inset,
+    0 1px 2px rgba(15, 23, 42, 0.06),
+    0 4px 12px -2px rgba(15, 23, 42, 0.08);
+}
 
-  .entry-card:hover,
-  .belief:hover,
-  .channels .channel:hover,
-  .nuget-item:hover {
-    box-shadow:
-      0 1px 0 0 rgba(255, 255, 255, 1) inset,
-      0 2px 4px rgba(15, 23, 42, 0.08),
-      0 12px 24px -6px rgba(15, 23, 42, 0.14);
-  }
+:root[data-theme="light"] .entry-card:hover,
+:root[data-theme="light"] .belief:hover,
+:root[data-theme="light"] .channels .channel:hover,
+:root[data-theme="light"] .nuget-item:hover {
+  box-shadow:
+    0 1px 0 0 rgba(255, 255, 255, 1) inset,
+    0 2px 4px rgba(15, 23, 42, 0.08),
+    0 12px 24px -6px rgba(15, 23, 42, 0.14);
+}
 
-  /* Section dividers — make the gradient ruling line more legible */
-  .home-block {
-    background-image: linear-gradient(90deg,
-      transparent 0%,
-      rgba(15, 23, 42, 0.10) 12%,
-      rgba(15, 23, 42, 0.20) 50%,
-      rgba(15, 23, 42, 0.10) 88%,
-      transparent 100%);
-  }
+/* Section dividers — gradient ruling line tuned for light theme */
+:root[data-theme="light"] .home-block {
+  background-image: linear-gradient(90deg,
+    transparent 0%,
+    rgba(15, 23, 42, 0.10) 12%,
+    rgba(15, 23, 42, 0.20) 50%,
+    rgba(15, 23, 42, 0.10) 88%,
+    transparent 100%);
+}
 
-  .section-heading,
-  .home-section-heading {
-    background-image: linear-gradient(90deg,
-      var(--accent) 0,
-      rgba(15, 23, 42, 0.18) 120px,
-      rgba(15, 23, 42, 0.10) 60%,
-      transparent 100%);
-  }
+:root[data-theme="light"] .section-heading,
+:root[data-theme="light"] .home-section-heading {
+  background-image: linear-gradient(90deg,
+    var(--accent) 0,
+    rgba(15, 23, 42, 0.18) 120px,
+    rgba(15, 23, 42, 0.10) 60%,
+    transparent 100%);
 }
 
 /* =========================================================

@@ -291,7 +291,7 @@ const profile: ProfileResponse = {
       role: 'PC 端开发工程师 · 牛股王',
       period: '2026-06 - 至今',
       location: '浙江杭州',
-      logo: 'niuguwang.png',
+      logo: 'niuguwang.webp',
       highlights: [
         '负责牛股王 PC 客户端的日常维护、性能优化与新功能开发，保障现有桌面端业务持续稳定迭代。',
         '主导新业务产线"量化业务"PC 端从 0 到 1 的建设：架构搭建、核心模块开发、服务端联调。',
@@ -303,7 +303,7 @@ const profile: ProfileResponse = {
       role: '自研引擎工具链开发工程师 / ET-引擎工具组',
       period: '2026-03 - 2026-05',
       location: '浙江杭州',
-      logo: 'booming.png',
+      logo: 'booming.webp',
       highlights: [
         '参与 Chaos 引擎工具链中的 C#/WPF UI/UX 平台框架研发。',
         '推进 AI、Figma 设计稿转 WPF 界面、配置编辑和自动化开发链路。',
@@ -315,7 +315,7 @@ const profile: ProfileResponse = {
       role: '主程序',
       period: '2023-06 - 2026-02',
       location: '浙江杭州',
-      logo: 'huiyuan.png',
+      logo: 'huiyuan.webp',
       highlights: [
         '主导 C#/.NET/WPF 桌面端架构设计，落地 MVVM、Prism、依赖注入和常用设计模式，支撑复杂工程业务流程。',
         '负责核心模块、任务拆分和代码架构，参与现场调研、原型设计、开发测试到上线交付的完整研发流程。',

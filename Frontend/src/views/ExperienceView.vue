@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router'
 import { useProfile } from '../composables/useProfile'
 import { useLocale } from '../composables/useLocale'
 import RichText from '../components/RichText.vue'
+import LazyImage from '../components/LazyImage.vue'
 import type { WorkProject } from '../types/profile'
 import { localizeExperience, localizeWorkProject } from '../i18n/messages'
 
@@ -52,11 +53,12 @@ const experiences = computed(() => {
         <div class="timeline-meta">
           <span class="period">{{ view.period }}</span>
           <span v-if="source.logo" class="company-logo" aria-hidden="true">
-            <img
+            <LazyImage
               :src="logoUrl(source.logo)"
               :alt="view.company + ' logo'"
-              width="160"
-              height="160"
+              :width="160"
+              :height="160"
+              object-fit="contain"
             />
           </span>
         </div>
